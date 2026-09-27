@@ -15,9 +15,10 @@ Start with a real design failure and identify the smallest instruction that woul
 Use Node.js 22 or newer. From the repository root:
 
 ```sh
-node --test tests/install.test.mjs
-node scripts/install.mjs --list
-node scripts/install.mjs --agent claude --scope user --dry-run
+npm test
+npm pack --dry-run
+node bin/deckl.mjs list
+node bin/deckl.mjs install --agent claude --dry-run
 ```
 
 Tests use temporary directories. Preserve the no-overwrite behavior and validate inputs before writing. Do not introduce automatic network requests or installation side effects.
@@ -26,4 +27,4 @@ Tests use temporary directories. Preserve the no-overwrite behavior and validate
 
 Keep commands executable from the documented directory. Check relative links and the skill catalog. Label untested host behavior and unpublished features honestly. Do not add fake screenshots, badges, testimonials, or outcome claims.
 
-The project owner has not selected a distribution license. Resolve licensing before accepting external contributions or publishing; retain applicable notices for any third-party material.
+Deckl is [MIT licensed](LICENSE). Retain applicable notices for third-party material. Follow [the publishing guide](docs/publishing.md) before a registry release; package ownership and live host behavior still need verification.

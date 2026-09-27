@@ -1,0 +1,16 @@
+{
+  "name": "deckl",
+  "version": "0.1.0",
+  "description": "Ten focused skills for distinctive interface design, art direction, refinement, and polish across AI coding agents.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/Hujifaq/deckl.git" },
+  "homepage": "https://github.com/Hujifaq/deckl#readme",
+  "bugs": { "url": "https://github.com/Hujifaq/deckl/issues" },
+  "bin": { "deckl": "bin/deckl.mjs" },
+  "engines": { "node": ">=22" },
+  "files": ["bin/", "scripts/", "skills/", "assets/", "docs/", "workflows.md", "evaluation.md", "CONTRIBUTING.md", "CHANGELOG.md"],
+  "scripts": { "test": "node --test tests/*.test.mjs", "check:package": "npm pack --dry-run" },
+  "keywords": ["agent-skills", "ui", "design", "anti-slop", "claude-code", "codex", "cursor", "copilot", "gemini", "opencode"]
+}

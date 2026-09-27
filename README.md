@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/deckl-banner.png" alt="Deckl — Give the interface a point of view. Ten focused skills, from first direction to final detail." width="100%">
+  <img src="https://raw.githubusercontent.com/Hujifaq/deckl/main/assets/deckl-banner.png" alt="Deckl — Give the interface a point of view. Ten focused skills, from first direction to final detail." width="100%">
 </p>
 
 # Deckl
@@ -10,7 +10,9 @@ Turn a brief or existing interface into distinctive, coherent, professionally fi
 
 [Quick start](#quick-start) · [Skills](#skills) · [Workflows](#workflows) · [Installation](#installation) · [FAQ](#faq)
 
-> **Local development preview.** Ten skills and a local installer are included. Deckl is not published to npm. Installation logic is tested; live assistant behavior and design effectiveness still need evaluation.
+<p><strong>10 focused skills</strong> &nbsp; / &nbsp; <strong>6 agent adapters</strong> &nbsp; / &nbsp; <strong>0 runtime dependencies</strong> &nbsp; / &nbsp; <a href="LICENSE">MIT</a></p>
+
+> **Release preview.** The npm package and executable are prepared locally. This project has not published a registry release, and the `deckl` package name is not confirmed available. Public commands below assume publication under that name. File installation is tested; live host discovery and design effectiveness still need evaluation.
 
 ## Start here
 
@@ -25,37 +27,55 @@ Choose the skill that matches the job. You do not need to run all ten.
 
 ## Quick start
 
-You need this folder, **Node.js 22+**, and an assistant that supports local skills. Open the Deckl folder in VS Code and run these commands in its terminal, from the folder containing this README.
+**Install → choose your agent → use a skill.** Requires Node.js 22+ and npm.
 
-### Claude Code
+<p align="center"><img src="https://raw.githubusercontent.com/Hujifaq/deckl/main/assets/deckl-install.svg" alt="After npm publication: npm install -g deckl, then deckl install. Alternatively run npx deckl install." width="100%"></p>
 
-Preview the destination, then install the starter skill for your user:
-
-```sh
-node scripts/install.mjs --agent claude --scope user --skill deckl-refine --dry-run
-node scripts/install.mjs --agent claude --scope user --skill deckl-refine
-```
-
-Open your website project in Claude Code, refresh the session if needed, and enter:
-
-```text
-/deckl-refine Improve this website's hierarchy, typography, and spacing. Keep its brand, content, and working controls.
-```
-
-### Codex
+### One command, after publication
 
 ```sh
-node scripts/install.mjs --agent codex --scope user --skill deckl-refine --dry-run
-node scripts/install.mjs --agent codex --scope user --skill deckl-refine
+npx deckl install
 ```
 
-Open your website project in Codex, refresh the session if needed, and enter:
+Choose an agent and user or project scope in the guided setup. The installer shows destinations and asks before copying. All ten skills are installed unless you select specific ones.
 
-```text
-$deckl-refine Improve this website's hierarchy, typography, and spacing. Keep its brand, content, and working controls.
+### Keep the command, after publication
+
+Install the Deckl executable globally once, then set up your skills:
+
+```sh
+npm install -g deckl
+deckl install
 ```
 
-Claude Code uses `/deckl-refine`. Codex uses `$deckl-refine`, or its skill picker where available. Copying files does not confirm that a host has discovered them; see [troubleshooting](#faq).
+Global npm installation adds the `deckl` command. It does not copy skills until you run `deckl install`.
+
+### Try it now from this repository
+
+Open the Deckl folder in VS Code and use its terminal:
+
+```sh
+node bin/deckl.mjs install
+```
+
+For a preview without writing files:
+
+```sh
+node bin/deckl.mjs install --agent claude --skill deckl-refine --dry-run
+```
+
+### Use Deckl in your website project
+
+Refresh the assistant, then try one of these prompts:
+
+| Agent | Prompt |
+| --- | --- |
+| Claude Code / Cursor | `/deckl-refine Improve the hierarchy, typography, and spacing. Keep the brand and working controls.` |
+| Codex | `$deckl-refine Improve the hierarchy, typography, and spacing. Keep the brand and working controls.` |
+| Copilot CLI | `Use the /deckl-refine skill to improve the hierarchy, typography, and spacing.` |
+| Gemini CLI / OpenCode | `Use the deckl-refine skill to improve the hierarchy, typography, and spacing.` |
+
+Copying files does not confirm host discovery. See [agent compatibility](docs/compatibility.md) and [troubleshooting](#faq).
 
 ## Skills
 
@@ -123,46 +143,65 @@ In Codex, replace the leading `/` with `$`. See [professional workflows and deta
 
 ## Installation
 
-### Install every skill
+The examples here use the globally installed `deckl` command **after publication**. Today, run the same arguments with `node bin/deckl.mjs` from this repository. You can also use `npx deckl` after the registry release.
 
-For a fresh installation, omit `--skill`. Choose the assistant you use:
+### Choose your agent
+
+Each command installs all ten skills in user scope. Pick the row for your agent:
+
+| Agent | Command | User destination |
+| --- | --- | --- |
+| Claude Code | `deckl install --agent claude` | `~/.claude/skills` |
+| Codex | `deckl install --agent codex` | `~/.agents/skills` |
+| Cursor | `deckl install --agent cursor` | `~/.cursor/skills` |
+| Copilot CLI | `deckl install --agent copilot` | `~/.copilot/skills` |
+| Gemini CLI | `deckl install --agent gemini` | `~/.gemini/skills` |
+| OpenCode | `deckl install --agent opencode` | `~/.config/opencode/skills` |
+
+Scopes and invocation follow the [linked official host documentation](docs/compatibility.md). Adapter tests check file placement; live host validation is pending.
+
+### Start with one skill
 
 ```sh
-node scripts/install.mjs --agent claude --scope user
+deckl install --agent claude --skill deckl-refine
 ```
-
-```sh
-node scripts/install.mjs --agent codex --scope user
-```
-
-If you already installed the starter skill, an all-skills install will stop because that folder exists. Select the additional skills explicitly, or follow the update instructions below.
 
 ### Select several skills
 
 Repeat `--skill`:
 
 ```sh
-node scripts/install.mjs --agent claude --scope user --skill deckl-design --skill deckl-type --skill deckl-motion
+deckl install --agent claude --skill deckl-design --skill deckl-type --skill deckl-motion
 ```
 
 ### Install for one project
 
-Use an existing website directory as `--project`. Quote paths containing spaces. This preview uses `.` and therefore targets the current Deckl checkout; replace it with your website's path before using it there.
+Run from your website directory. Project scope defaults to that current directory:
 
 ```sh
-node scripts/install.mjs --agent claude --scope project --project . --skill deckl-refine --dry-run
+deckl install --agent codex --scope project --dry-run
 ```
 
-Check the printed destination, then repeat your chosen command without `--dry-run`. Use `--agent codex` for Codex.
+Check the printed destination, then repeat without `--dry-run`. To target a different existing directory, add `--project` and its path. Quote paths containing spaces.
+
+### Set up several agents
+
+```sh
+deckl install --agent claude --agent codex --dry-run
+```
+
+The installer checks every selected destination before copying anything. Many hosts also read other agents' directories, so avoid duplicate copies in directories your host already discovers.
 
 ### Inspect available options
 
 ```sh
-node scripts/install.mjs --list
-node scripts/install.mjs --help
+deckl list
+deckl agents
+deckl --help
+deckl --version
 ```
 
-The helper runs locally, uses no dependencies or network, and checks all selected destinations before copying. It refuses existing skill folders and symlink discovery directories. There is no overwrite or force option.
+The copying step runs locally with no network and no runtime dependencies. npm downloads the package normally. No `postinstall` hook writes agent files. Existing skill folders and symlink discovery directories are refused; there is no force option. If you already installed one skill, select only the new ones or deliberately replace the old copy using the steps below.
 
 ### Manual installation
 
@@ -172,6 +211,10 @@ Copy the **entire** wanted folder from `skills/`, including its references. For 
 | --- | --- | --- |
 | Claude Code | `~/.claude/skills/deckl-refine/` | `.claude/skills/deckl-refine/` |
 | Codex | `~/.agents/skills/deckl-refine/` | `.agents/skills/deckl-refine/` |
+| Cursor | `~/.cursor/skills/deckl-refine/` | `.cursor/skills/deckl-refine/` |
+| Copilot CLI | `~/.copilot/skills/deckl-refine/` | `.github/skills/deckl-refine/` |
+| Gemini CLI | `~/.gemini/skills/deckl-refine/` | `.gemini/skills/deckl-refine/` |
+| OpenCode | `~/.config/opencode/skills/deckl-refine/` | `.opencode/skills/deckl-refine/` |
 
 The final structure must contain `deckl-refine/SKILL.md`, not just a loose Markdown file. `~` means your home directory; project paths are relative to your website. For remote or container sessions, install in the environment running the assistant. Other compatible assistants may also discover `.agents/skills`; avoid duplicate installations in directories a host reads.
 
@@ -182,6 +225,12 @@ Host documentation: [Claude Code skills](https://code.claude.com/docs/en/skills)
 Compare the installed folder with the new source first. Preserve your edits by backing up the exact installed skill folder **outside all skill discovery directories**, then move the installed folder aside and rerun the installer for that skill. Automatic merging is not provided.
 
 To uninstall, remove only the specific Deckl skill folder you installed after preserving local edits. Refresh the assistant afterward. Do not remove the parent skills directory: it may contain other people's skills.
+
+`npm uninstall -g deckl` removes the executable; it leaves skill copies in place. Likewise, updating the npm package does not update your installed skill folders.
+
+### Publish your own release
+
+Maintaining Deckl? Follow the [npm publishing guide](docs/publishing.md) for name availability, local package checks, authentication, and release commands. Public publishing is currently disabled by `private: true` in `package.json` until the package identity is confirmed.
 
 ## FAQ
 
@@ -195,14 +244,14 @@ Yes. Both use portable skill instructions to improve AI-generated interfaces. De
 <details>
 <summary><strong>Can I install Deckl globally with npm?</strong></summary>
 
-Not yet. There is no published or verified Deckl npm package in this project. Use the included local helper. A global npm command can be added once the package identity, license, release process, and installer behavior are ready.
+The package supports global npm installation and a `deckl` executable. A registry release has not been published by this project. Until then, use `node bin/deckl.mjs install`, or pack the repository with `npm pack` and install the resulting local tarball. After publication under the `deckl` name, `npm install -g deckl` becomes the public command.
 
 </details>
 
 <details>
 <summary><strong>Does it work in every AI IDE?</strong></summary>
 
-The skills use portable Markdown and have no required host-specific tools. The installer currently targets Claude Code and Codex directories only. Other Agent Skills-compatible assistants may load them, but each host's discovery, command syntax, and behavior needs separate testing. End-to-end host validation is pending.
+The installer includes six adapters: Claude Code, Codex, Cursor, Copilot CLI, Gemini CLI, and OpenCode. The skills use portable Markdown and no required host-specific tools. Directory placement is tested, but live discovery, invocation, and design behavior need testing in each host. Other compatible assistants can use manual folder installation after verifying their own paths.
 
 </details>
 
@@ -223,7 +272,7 @@ That level of craft is an aspiration, not a guaranteed result. Quality depends o
 <details>
 <summary><strong>The skill does not appear. What should I check?</strong></summary>
 
-Check the exact folder hierarchy, the environment running your assistant, and its current discovery settings. Refresh or restart the session. Use `/deckl-refine` in Claude Code and `$deckl-refine` in Codex, or the host's skill picker. Check for duplicate versions. Installer success means files were copied; it does not confirm host discovery.
+Check the exact folder hierarchy, the environment running your assistant, and its discovery settings. Refresh or restart the session and check for duplicate versions. Use the syntax in the quick start; not every host exposes skills as slash commands. See the [compatibility guide](docs/compatibility.md). Installer success confirms copying, not host discovery.
 
 </details>
 
@@ -241,10 +290,11 @@ Open this folder in VS Code. Each command's instructions live in `skills/<name>/
 Run the installer checks from this folder:
 
 ```sh
-node --test tests/install.test.mjs
+npm test
+npm pack --dry-run
 ```
 
-The tests use temporary directories and cover selected installs, complete project installs, dry runs, conflicts, invalid inputs, repeat installs, and symlink rejection. They do not test the quality of generated designs or live assistant discovery.
+The tests use temporary directories and cover all six adapters in both scopes, CLI behavior, multiple-agent preflight, conflicts, invalid inputs, dry runs, repeat installs, and symlink rejection. They do not test design quality or live assistant discovery.
 
 Use [evaluation.md](evaluation.md) for behavioral testing and [CONTRIBUTING.md](CONTRIBUTING.md) for changes.
 
@@ -255,10 +305,18 @@ deckl/
 ├── evaluation.md
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
+├── LICENSE
+├── package.json
 ├── assets/deckl-banner.png
 ├── assets/deckl-logo.png
+├── assets/deckl-install.svg
 ├── docs/comparison.md
+├── docs/compatibility.md
+├── docs/publishing.md
+├── bin/deckl.mjs
+├── scripts/agents.mjs
 ├── scripts/install.mjs
+├── tests/cli.test.mjs
 ├── tests/install.test.mjs
 └── skills/
     └── deckl-*/SKILL.md  (+ references where needed)
@@ -266,8 +324,8 @@ deckl/
 
 ## Project status
 
-**Included:** ten skills, supporting references, workflow examples, a local installer, installer tests, and an evaluation protocol.
+**Included:** ten skills, six agent adapters, an npm executable with guided setup, an MIT license, supporting references, workflow examples, installer tests, and a publishing guide.
 
-**Before public release:** evaluate real design outputs, verify discovery and invocation in each advertised host, choose a distribution license, and prepare npm packaging if desired. See [the changelog](CHANGELOG.md).
+**Before public release:** confirm npm package ownership or availability, verify live discovery and invocation in the advertised hosts, and evaluate real design outputs. See [the changelog](CHANGELOG.md).
 
-No license has been selected yet; this project does not currently assert an open-source license grant. Package, domain, and trademark availability for “Deckl” have not been verified.
+Licensed under [MIT](LICENSE). npm publication is pending. Package, domain, and trademark availability for “Deckl” have not been asserted.
