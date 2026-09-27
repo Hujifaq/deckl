@@ -1,0 +1,43 @@
+---
+name: deckl-imagery
+description: Art-direct website photography, product imagery, project presentations, crops, and media treatment. Use when generic stock visuals, weak image composition, or inconsistent assets undermine a premium website. Works with existing assets or available authorized media tools; does not assume image generation is installed.
+---
+
+# Deckl Imagery
+
+Make the subject feel specific and tangible. A strong asset can carry more identity than layers of decorative UI.
+
+## Inventory and intention
+
+Read project instructions and inspect available assets, actual content, brand references, media components, and the relevant page. Identify which images provide evidence, which explain something, and which establish atmosphere. Preserve those distinctions.
+
+Determine the subject, point of view, lighting, background, crop, color treatment, and required aspect ratios. Use a consistent visual family rather than an assortment of unrelated impressive images.
+
+Inspect supplied references through available tools. Explain gaps in access. Do not claim an asset exists, is licensed, or depicts the actual product without evidence.
+
+## Choose the appropriate work
+
+- Existing good assets: improve selection, ordering, scale, crop, and layout before sourcing replacements.
+- Missing assets with available authorized tools: generate or source a focused set with clear use rights and a consistent direction.
+- Missing tools or rights: write a precise asset brief and improve the composition using available material. Do not fabricate downloadable assets or silently add unrelated remote URLs.
+- Review or art-direction-only requests: deliver recommendations or briefs without editing the website.
+
+Do not generate documentary-looking testimonials, customer evidence, staff portraits, certifications, or product functionality and present them as real. Label conceptual imagery where confusion would matter. Do not replace real product photography with an attractive inaccurate substitute.
+
+## Asset brief
+
+For each necessary new asset, specify its page role, subject, composition, lighting, background, palette relationship, crop-safe area, aspect ratio, and factual constraints. Identify what must stay legible or accurate. Keep generated text and interface diagrams out of raster imagery when editable HTML or genuine screenshots better serve the task.
+
+## Integrate
+
+Use consistent media ratios with intentional exceptions for focal moments. Choose object-position or alternate crops to preserve the subject on mobile. Do not stretch source images or obscure them with unnecessary floating badges.
+
+Use the project's image pipeline. Set dimensions or aspect ratios to avoid layout shifts, provide responsive sources where supported, and avoid loading every full-resolution asset upfront. Treat the primary visible image differently from below-fold media; do not lazy-load the page's critical opening image indiscriminately.
+
+Use meaningful alternative text for informative images and empty alternatives for purely decorative ones. Preserve real captions and required attribution without turning them into ornamental metadata. Provide a useful video poster and accessible controls where appropriate.
+
+## Verify and hand off
+
+Inspect crops at wide and narrow sizes, subject resolution, slow or failed loading, contrast of overlaid text, and any gallery controls. Run relevant project checks. Report which assets were reused, created, or still needed, and what visual inspection was possible.
+
+Stop when the image system supports the page's concept. Do not add more imagery merely because there is empty space.
