@@ -5,7 +5,7 @@
   <rect x="1" y="1" width="1278" height="428" rx="12" fill="none" stroke="#333"/>
   <g font-family="Arial, Helvetica, sans-serif">
     <text x="52" y="52" fill="#fff" font-size="14" letter-spacing="3">DECKL / INSTALL</text>
-    <text x="1228" y="52" text-anchor="end" fill="#999" font-size="12" letter-spacing="2">KEYBOARD SETUP / NEXT RELEASE</text>
+    <text x="1228" y="52" text-anchor="end" fill="#999" font-size="12" letter-spacing="2">ARROWS / SPACE / ENTER</text>
     <path d="M52 78H1228" stroke="#333"/>
     <text x="52" y="129" fill="#999" font-size="16">01 / OPEN SETUP</text>
     <text x="52" y="177" fill="#fff" font-family="monospace" font-size="29">npx @hujifaq/deckl@latest install</text>

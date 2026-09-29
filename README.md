@@ -12,8 +12,6 @@ Turn a brief or existing interface into distinctive, coherent, professionally fi
 
 <p><strong>10 focused skills</strong> &nbsp; / &nbsp; <strong>6 agent adapters</strong> &nbsp; / &nbsp; <strong>0 runtime dependencies</strong> &nbsp; / &nbsp; <a href="LICENSE">MIT</a></p>
 
-> **Keyboard setup update:** the arrow-key interface described here is prepared for the next release. The published `@hujifaq/deckl` package may still show the earlier numbered menu until that release is published. Try this checkout with `node bin/deckl.mjs install` today.
-
 ## Start here
 
 | Your task | Start with |
@@ -31,15 +29,29 @@ Choose the skill that matches the job. You do not need to run all ten.
 
 <p align="center"><img src="https://raw.githubusercontent.com/Hujifaq/deckl/main/assets/deckl-install.svg" alt="Run npx @hujifaq/deckl@latest install. Use arrows to move, Space to select, and Enter to continue." width="100%"></p>
 
-### One command
+### 1. Install Deckl
+
+```sh
+npm install -g @hujifaq/deckl@latest
+```
+
+### 2. Open setup
+
+```sh
+deckl install
+```
+
+For installation into a project, open your website folder in the terminal first. Global npm installation adds the `deckl` command; setup copies your chosen skills.
+
+Prefer to run setup without a global installation?
 
 ```sh
 npx @hujifaq/deckl@latest install
 ```
 
-Once setup opens, you do not need to type names or numbers:
+npm may ask you to type `y` before downloading the package. Once Deckl opens, use the keyboard controls below; no names or numbers to type.
 
-The setup features a sculpted white Deckl wordmark with silver edges, a subtle offset shadow, and neutral grayscale controls. Color is reserved for agent choices: coral for Claude, mint for Codex, silver for Cursor, violet for Copilot, blue for Gemini, and sand for OpenCode. These are display colors inspired by their identities. Smaller terminals automatically switch to a compact layout. Set `NO_COLOR=1` to remove agent colors too; selection remains visible through circles and the focus arrow.
+### 3. Make it yours
 
 | Key | Action |
 | --- | --- |
@@ -48,38 +60,27 @@ The setup features a sculpted white Deckl wordmark with silver edges, a subtle o
 | **Enter** | Continue or confirm the highlighted choice |
 | **Esc / Ctrl+C** | Cancel without installing |
 
-1. **Agents:** select one or more coding assistants.
+1. **Agents:** press Space to select one or more assistants, then Enter.
 2. **Location:** choose personal installation or the current project.
-3. **Skills:** keep all ten selected, or deselect the ones you do not need.
-4. **Confirm:** review your choices and press Enter to install.
+3. **Skills:** keep all ten selected, or use Space to deselect any.
+4. **Confirm:** review the destinations and press Enter to install.
 
-For project installation, launch from your website folder. The guided setup uses that directory automatically. Existing skill folders are preserved; a conflict stops installation before copying.
+Existing skill folders are preserved. If setup reports a conflict, follow [Update or remove](#update-or-remove) before retrying.
 
-### Keep the command
+The setup uses a white Deckl wordmark, grayscale controls, and individual agent accents. Smaller terminals use a compact layout. Set `NO_COLOR=1` for monochrome output.
 
-Install the Deckl executable globally once, then set up your skills:
+### Run from source
 
-```sh
-npm install -g @hujifaq/deckl@latest
-deckl install
-```
-
-Global npm installation adds the `deckl` command. It does not copy skills until you run `deckl install`.
-
-In the new interface, running just `deckl` also opens guided setup in an interactive terminal. Use `deckl --help` for command options. After a new release, rerun the global install command to update the executable; installed skill copies are managed separately.
-
-### Try it now from this repository
-
-Open the Deckl folder in VS Code and use its terminal:
+In VS Code, open the Deckl repository folder containing `package.json` and use its terminal:
 
 ```sh
 node bin/deckl.mjs install
 ```
 
-For a preview without writing files:
+Preview the setup without copying skills:
 
 ```sh
-node bin/deckl.mjs install --agent claude --skill deckl-refine --dry-run
+node bin/deckl.mjs install --dry-run
 ```
 
 ### Use Deckl in your website project
@@ -240,6 +241,16 @@ Host documentation: [Claude Code skills](https://code.claude.com/docs/en/skills)
 
 ### Update or remove
 
+Update the global CLI and check its version:
+
+```sh
+npm install -g @hujifaq/deckl@latest
+deckl --version
+deckl install
+```
+
+Updating the CLI does not replace skill copies already installed for your agents.
+
 Compare the installed folder with the new source first. Preserve your edits by backing up the exact installed skill folder **outside all skill discovery directories**, then move the installed folder aside and rerun the installer for that skill. Automatic merging is not provided.
 
 To uninstall, remove only the specific Deckl skill folder you installed after preserving local edits. Refresh the assistant afterward. Do not remove the parent skills directory: it may contain other people's skills.
@@ -248,7 +259,7 @@ To uninstall, remove only the specific Deckl skill folder you installed after pr
 
 ### Publish your own release
 
-Maintaining Deckl? Follow the [npm publishing guide](docs/publishing.md) to release this update under `@hujifaq/deckl`. Each release needs a new version; npm does not allow overwriting `0.1.0`.
+Maintaining Deckl? Follow the [npm publishing guide](docs/publishing.md) to release this update under `@hujifaq/deckl`. Each release needs an unused version; published versions cannot be overwritten.
 
 ## FAQ
 
@@ -262,7 +273,7 @@ Yes. Both use portable skill instructions to improve AI-generated interfaces. De
 <details>
 <summary><strong>Can I install Deckl globally with npm?</strong></summary>
 
-Yes: run `npm install -g @hujifaq/deckl@latest`, then `deckl install`. npm installs the executable first; the second command opens setup. The new keyboard menu becomes available through npm when this update is published. Use `node bin/deckl.mjs install` to try the current source now.
+Yes: run `npm install -g @hujifaq/deckl@latest`, then `deckl install`. The package name is `@hujifaq/deckl`; the terminal command is `deckl`. Running `deckl` alone also opens setup in an interactive terminal.
 
 </details>
 
@@ -301,6 +312,34 @@ It stopped to preserve existing files. Compare that folder with the source, back
 
 </details>
 
+<details>
+<summary><strong>I still see the old numbered setup.</strong></summary>
+
+Update the global CLI with `npm install -g @hujifaq/deckl@latest`, then run `deckl --version`. Compare it with `npm view @hujifaq/deckl version`. `npm --version` reports npm's version, not Deckl's.
+
+You can also launch `npx @hujifaq/deckl@latest install`. If that shows the new setup but `deckl install` does not, run `which -a deckl` on macOS/Linux to check for multiple installed commands.
+
+</details>
+
+<details>
+<summary><strong>npm reports E404 or ETARGET.</strong></summary>
+
+Use the full package name `@hujifaq/deckl`. Check the requested version against the public registry:
+
+```sh
+npm view @hujifaq/deckl versions --registry=https://registry.npmjs.org/
+```
+
+If the version is listed, retry with fresh metadata:
+
+```sh
+npm install -g @hujifaq/deckl@latest --prefer-online --registry=https://registry.npmjs.org/
+```
+
+If it is not listed, the version is not available through that lookup yet. An authentication or network error requires resolving that error first. For maintainers, see the [publishing guide](docs/publishing.md).
+
+</details>
+
 ## Edit and verify
 
 Open this folder in VS Code. Each command's instructions live in `skills/<name>/SKILL.md`. Keep the folder name and YAML `name` identical, and keep references inside their owning skill.
@@ -314,14 +353,13 @@ npm pack --dry-run
 
 The tests use temporary directories and cover all six adapters in both scopes, CLI behavior, multiple-agent preflight, conflicts, invalid inputs, dry runs, repeat installs, and symlink rejection. They do not test design quality or live assistant discovery.
 
-Use [evaluation.md](evaluation.md) for behavioral testing and [CONTRIBUTING.md](CONTRIBUTING.md) for changes.
+Use [evaluation.md](evaluation.md) for behavioral testing.
 
 ```text
 deckl/
 ├── README.md
 ├── workflows.md
 ├── evaluation.md
-├── CONTRIBUTING.md
 ├── CHANGELOG.md
 ├── LICENSE
 ├── package.json
@@ -334,6 +372,8 @@ deckl/
 ├── bin/deckl.mjs
 ├── scripts/agents.mjs
 ├── scripts/install.mjs
+├── scripts/setup.mjs
+├── scripts/setup-view.mjs
 ├── tests/cli.test.mjs
 ├── tests/install.test.mjs
 └── skills/
@@ -344,6 +384,6 @@ deckl/
 
 **Included:** ten skills, six agent adapters, an npm executable with guided setup, an MIT license, supporting references, workflow examples, installer tests, and a publishing guide.
 
-**Still to validate:** live discovery and invocation in each advertised host, and real design outcomes. The keyboard setup update also needs a new npm release. See [the changelog](CHANGELOG.md).
+**Still to validate:** live discovery and invocation in each advertised host, and real design outcomes. See [the changelog](CHANGELOG.md).
 
-Licensed under [MIT](LICENSE). The npm package is `@hujifaq/deckl`; the terminal command is `deckl`. This keyboard setup update has not yet been published.
+Licensed under [MIT](LICENSE). The npm package is `@hujifaq/deckl`; the terminal command is `deckl`.

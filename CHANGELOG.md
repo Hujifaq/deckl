@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Clarified global installation, keyboard setup, CLI updates, and npm troubleshooting.
+- Removed outdated next-release notices and the README contribution link.
+
+## 1.0.0
+
 - Refined Deckl terminal lettering with silver edges and an offset grayscale shadow.
 
 - White block-letter Deckl header, grayscale controls, individual agent accents, selection circles, and step indicators.
