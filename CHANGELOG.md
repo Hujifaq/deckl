@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Reworked showcase design around reference study, expressive composition, scroll choreography, and browser review.
+- Added preservation and before/after comparison to refinement, layout, and polish.
+- Expanded motion guidance for ScrollTrigger, scene pacing, lifecycle cleanup, and responsive alternatives.
+- Added Astra and cross-model usage prompts and visual regression evaluation scenarios; quality benchmarking remains pending.
+
 - Clarified global installation, keyboard setup, CLI updates, and npm troubleshooting.
 - Removed outdated next-release notices and the README contribution link.
 

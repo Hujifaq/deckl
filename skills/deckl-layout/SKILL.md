@@ -23,6 +23,10 @@ When adjacent sections repeat mechanically, choose structures from their content
 
 Use asymmetry only when the hierarchy remains legible. Negative space should frame something or create pacing. A minimal design must still explain the product and expose useful actions.
 
+## Protect composition during improvement
+
+Identify what already works in the rendered page before rearranging it. Preserve deliberate tension, overlaps, dramatic scale, and whitespace where they support the subject. A consistent grid does not require every block to have the same silhouette. For a showcase, map the page's focal moments and quieter regions before changing spacing. Compare the same desktop and mobile views afterward; revise your own changes if the new arrangement becomes more generic or weakens the original focus.
+
 ## Implement
 
 - Prefer Grid or Flexbox relationships that adapt to real content. Avoid absolute positioning for text blocks that must grow.

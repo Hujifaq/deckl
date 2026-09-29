@@ -33,3 +33,11 @@ Preserve route state, keyboard focus, scroll restoration, and the meaning of bro
 ## Advanced rendering
 
 Use canvas or WebGL only when the concept needs capabilities beyond ordinary layout. Provide accessible DOM content, a usable fallback, and an appropriate loading strategy. Measure initialization cost, memory pressure, and interaction responsiveness with available tools. Do not claim performance from library choice alone.
+
+## ScrollTrigger implementation decisions
+
+Use a component-owned context or the framework integration for lifecycle cleanup. Use `gsap.matchMedia()` for breakpoint and reduced-motion variants and revert its work when the component unmounts. Pin a stable wrapper; transform a child. Use function-based travel and `invalidateOnRefresh` when dimensions change; skip scenes with no travel. Read the installed version's [ScrollTrigger documentation](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) and [matchMedia documentation](https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/) when implementing.
+
+Start scrubbed spatial progress with linear easing; add smoothing only if it improves control in the actual scene. Keep entrance timing separate from scroll progress. For conventional UI feedback, 120–220 ms is a useful starting range; a short editorial entrance might use 450–800 ms. These are tuning suggestions, not requirements. Long staggers should never gate the primary action.
+
+Test deep linking into the scene, reverse scroll, rapid scroll, changed viewport height, font loading, route re-entry, and reduced-motion toggling. Inspect the content at the midpoint as well as its final state. Scroll scenes must look composed throughout the journey.

@@ -80,3 +80,11 @@ After deciding which issues to fix:
 | Small finish corrections before delivery | `deckl-polish` |
 
 These are authoring workflows. Real awards, browser support, accessibility, and performance depend on implementation and evidence; the command name is not a guarantee.
+
+## Expressive redesign with Astra or another capable model
+
+Select your model in the assistant. Start with `deckl-design` for a substantial visual overhaul and supply references, real assets, and the existing site. Continue through implementation and desktop/mobile browser review in the same conversation. Use `deckl-motion` only when a focused motion pass is needed afterward; finish with `deckl-polish` if there are remaining detail defects.
+
+For a beautiful existing site, start with `deckl-refine` and explicitly preserve the qualities you like. Running a redesign pass and then a generic simplification pass can erase the direction you just established.
+
+See [ready-to-use briefs and model guidance](docs/model-workflow.md). The skills do not change your selected model or guarantee award recognition.

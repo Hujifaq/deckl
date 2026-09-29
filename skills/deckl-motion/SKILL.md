@@ -5,7 +5,7 @@ description: Design and implement purposeful website animation, transitions, scr
 
 # Deckl Motion
 
-Use motion to express hierarchy, continuity, feedback, or a story grounded in the subject. Premium motion feels controlled and responsive. It should not delay access to the content.
+Use motion to express hierarchy, continuity, feedback, atmosphere, or a story grounded in the subject. Premium motion feels controlled and responsive. It should not delay access to the content.
 
 ## Inspect and specify
 
@@ -13,7 +13,9 @@ Read project instructions and inspect the component lifecycle, existing animatio
 
 For each proposed effect, define the trigger, purpose, moving element, start/end state, cancellation behavior, reduced-motion alternative, and narrow-screen behavior. Keep this concise and limited to the affected features. Review-only requests receive a motion specification without edits.
 
-If the user requests ambitious scroll storytelling, choose a feature that benefits from sequence, comparison, or spatial continuity. A large animation library or long pinned section is not evidence of quality.
+If the user requests ambitious scroll storytelling, implement a feature that benefits from sequence, comparison, or spatial continuity. Define entry, midpoint, exit, and reverse-scroll behavior. Consider a changing product stage, editorial image expansion, coordinated project index, or a measured gallery journey. Choose from the actual content. Repeated fade-ups alone do not satisfy this brief.
+
+Give the main scene a clear progression and quieter supporting motion. Specify the intended movement and timing, then tune it in the browser. GSAP ScrollTrigger is a suitable option for coordinated pinning and scrubbing when the stack permits it; do not reject a justified animation dependency merely because the result is expressive.
 
 Read [motion patterns](references/patterns.md) for implementation decisions and failure checks.
 

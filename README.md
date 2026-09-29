@@ -96,6 +96,18 @@ Refresh the assistant, then try one of these prompts:
 
 Copying files does not confirm host discovery. See [agent compatibility](docs/compatibility.md) and [troubleshooting](#faq).
 
+## Build an expressive showcase
+
+For an Awwwards-inspired redesign, start with **deckl-design**. It now develops a concrete art direction, varied page composition, and signature scroll choreography, then asks the assistant to review the actual result in the browser. For a site whose look you already like, **deckl-refine** preserves its strongest qualities and compares before and after.
+
+Choose GPT-6 Astra in Codex if available, or your preferred capable model in another assistant. Deckl supplies the design workflow; the model runs in your assistant. See [model setup and ready-to-use prompts](docs/model-workflow.md) for Astra, Claude, and other hosts.
+
+```text
+$deckl-design Redesign this site as an expressive showcase using the supplied references and real assets. Preserve its strongest qualities and working actions. Build distinctive composition and a signature scroll narrative. Inspect desktop and mobile renders, test the motion, and correct visible regressions before finishing.
+```
+
+In Claude Code, use `/deckl-design`. These revised instructions are under **Unreleased** until a new npm version is published. Updating the npm command alone does not replace installed skill copies; follow [Update or remove](#update-or-remove) or test from this checkout in a fresh project.
+
 ## Skills
 
 The names below link to the actual instructions. Use `/` before a name in Claude Code and `$` in Codex.
