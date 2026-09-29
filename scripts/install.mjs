@@ -81,7 +81,8 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
     throw error;
   }
   log(`\nCopied ${names.length} skills for ${agentIds.length} agent${agentIds.length === 1 ? '' : 's'}. Refresh your assistant.`);
-  for (const id of agentIds) log(`${agents[id].label}: ${agents[id].prompt}`);
+  const example = names.includes('deckl-refine') ? 'deckl-refine' : names[0];
+  for (const id of agentIds) log(`${agents[id].label}: ${agents[id].prompt.replace('deckl-refine', example)}`);
   log('Installation is complete. Live host discovery is not verified by this installer.');
 }
 
