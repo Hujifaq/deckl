@@ -12,10 +12,10 @@ Deckl organizes the work by professional task: establish a direction, build a de
 | Direction | Modern, minimal, premium defaults; explicit brand requirements take precedence. |
 | Scope | Direction and audit avoid edits by default; refinement and polish have bounded scopes. |
 | Resources | References live inside their owning skill so individual installations remain usable. |
-| Installation | Prepared npm executable with guided setup and six adapters; no published registry release. |
+| Installation | Scoped npm executable with six adapters; the new keyboard setup is pending release. |
 | Imagery | Art direction and available-tool workflows; no bundled image generator. |
 | Evidence | Installer checks and a written evaluation protocol; live design effectiveness remains untested. |
-| Distribution | MIT-licensed local package; public release is pending. |
+| Distribution | MIT-licensed package published as `@hujifaq/deckl`. |
 
 Deckl should earn its positioning through real before-and-after evaluations using the same brief, model, tools, and budget. A good README and strong instructions alone do not demonstrate better output or award-winning results.
 

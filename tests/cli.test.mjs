@@ -54,7 +54,8 @@ test('OpenCode refuses symlinks in intermediate config directories', { skip: pro
 test('CLI help, version, agents, and skills are informational', async t => {
   const { root, logs, options } = await fixture(t);
   for (const args of [[], ['--help'], ['--version'], ['agents'], ['list']]) await runCli(args, options);
-  assert.ok(logs.includes('0.1.0'));
+  const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  assert.ok(logs.includes(pkg.version));
   assert.ok(logs.some(line => line.includes('deckl-refine')));
   assert.deepEqual(await readdir(root), []);
 });
