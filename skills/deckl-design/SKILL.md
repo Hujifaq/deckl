@@ -1,49 +1,42 @@
 ---
 name: deckl-design
-description: Build or substantially redesign a marketing website, landing page, portfolio, or editorial showcase with distinctive art direction and premium execution. Use for a new website or an explicitly requested visual overhaul, including Awwwards-inspired briefs. Not for small polish requests or dense operational dashboards.
+description: Build or substantially redesign expressive marketing websites, portfolios, and editorial showcases with distinctive composition and scroll choreography. Use for Awwwards-inspired builds or a requested visual overhaul.
 ---
 
 # Deckl Design
 
-Create a coherent website whose content, composition, imagery, and interaction express a real point of view. Treat award-level craft as an aspiration, not a certification. Default toward modern, restrained execution when the brief leaves the style open, while allowing an expressive focal moment where it serves the brand.
+Deliver a memorable, fully implemented website with a visual idea specific to its subject. The user's brief takes precedence. An ambitious showcase deserves ambitious composition and motion; do not interpret premium as automatically quiet, neutral, or static. Preserve working routes and product behavior.
 
-## Establish the direction
+## Choose a direction that earns the design
 
-Read project instructions and inspect the stack, current routes, brand material, content, and existing visual truth. Keep the existing framework and useful infrastructure. A visual overhaul does not authorize replacing authentication, commerce logic, analytics, or routes.
+Inspect the actual page, available imagery, content, and stack. On an existing site, identify its strongest qualities before replacing anything. On a new site, identify the strongest material to build around: work, product, place, process, or point of view.
 
-Distinguish an empty project from an existing website. Preserve identity for refinement; replace the visual language when a redesign is explicitly requested. Do not settle for recoloring a rejected layout when the user asked for a substantial change.
+For an Awwwards-inspired request, read [reference study](references/reference-study.md) and inspect relevant references with available tools. Extract composition and interaction principles; do not copy a site's identity. When references cannot be viewed, state that limitation and develop an original direction from the supplied material.
 
-State a brief design direction grounded in audience, product, and available assets. Inspect supplied visual references if tools permit; otherwise identify the missing evidence. Use references for principles rather than cloning their expression. Proceed on sensible assumptions unless the ambiguity materially changes the outcome.
+Briefly establish the concept, first viewport, section rhythm, typography, image treatment, and signature interaction. Compare alternative compositions mentally and commit to the strongest fit; do not stop at a mood board when implementation is requested. Infer ordinary design choices and continue without an extra approval step.
 
-## Compose the experience
+## Compose before decorating
 
-Use [composition decisions](references/composition.md) to plan the page around its content.
+Read [composition decisions](references/composition.md). Choose a page structure suited to this subject, not the default hero/features/testimonials/pricing stack. Give the opening a clear focal point: a striking crop, an expressive typographic composition, a real product demonstration, or work presented at convincing scale.
 
-Define the opening message, dominant visual or typographic idea, and next action. Make the first viewport informative and composed at ordinary laptop sizes. Do not fill it with a cluster of badges, metadata, multiple claims, and competing buttons.
+Carry the idea beyond the hero. Plan transitions between sections through scale, density, alignment, and changes of pace. Design quieter supporting content so the expressive moments have contrast. Comparable information still needs comparable layouts.
 
-Build a sequence in which each section answers a visitor question or presents meaningful work. Vary scale and composition when the content changes, while retaining consistent alignment and type roles. Do not fabricate enough content to reach a fixed section count.
+Use actual content and assets. Typography must be intentional at laptop and phone sizes: deliberate wraps, readable body text, appropriate measure, and loaded fonts. Respect the existing palette where required; minimalism is one possible direction, not Deckl's imposed style. Do not replace strong photography, color, texture, or animation with empty space and generic cards.
 
-Choose a limited set of visual rules and apply them through the entire page. Craft the footer, navigation, mobile menu, and secondary states with the same care as the hero. Preserve content density appropriate to the product.
+## Choreograph the experience
 
-Use one distinctive idea with depth: a purposeful image sequence, a revealing comparison, an unusual but readable composition, or an interaction grounded in the subject. Avoid accumulating unrelated effects to signal creativity.
+When expressive motion or scroll storytelling is requested, implement it as part of the concept. Read [scroll choreography](references/scroll-choreography.md). An all-purpose fade-up applied to every section does not fulfill an ambitious motion brief.
 
-## Implement
+Specify each main scene as entry → development → exit. Connect progress to meaningful changes in imagery, narrative, or spatial relationships. A portfolio may reveal projects through a moving index; a product may unfold through a material-to-detail sequence. Choose according to content, rather than applying every effect.
 
-- Use semantic HTML and the project's existing component and styling conventions. Inspect dependencies before importing new packages.
-- Establish reusable type, spacing, color, and shape roles. Avoid disconnected one-off values unless the composition needs an optical adjustment.
-- Build with actual supplied content and assets where possible. Do not invent customer relationships, awards, statistics, endorsements, or finished product screenshots.
-- Use available image tools or licensed assets when needed and authorized. Record unresolved asset needs; do not pass substitutes off as factual photography or evidence.
-- Treat typography as layout: plan wrapping, readable text widths, font loading, and fallback behavior.
-- Preserve native scrolling and usable controls. Prefer CSS and existing animation tools; introduce heavy rendering only for a specific justified feature with a lightweight fallback.
-- Make all visible actions meaningful. Connect to existing destinations or permitted local flows. Never disguise a dead button as a working feature.
-- Check keyboard behavior, focus, contrast, and mobile navigation while implementing, not only at the end.
+Use GSAP ScrollTrigger when it suits coordinated pinning and scrubbing and the project permits it; use an existing equivalent when suitable. Simple transitions can remain CSS. Preserve natural scrolling, usable controls, and a deliberate mobile and reduced-motion composition. Do not let implementation caution silently delete the requested creative feature: simplify its mechanism while retaining its intent.
 
-For responsive behavior, redesign the composition for touch and narrow widths. Retain the concept through crop, ordering, rhythm, or type rather than shrinking the desktop page. For motion, provide a composed static version under reduced motion and ensure content remains visible if animation initialization fails.
+## Build and visually finish
 
-## Verify and finish
+Implement the direction across navigation, hero, body, footer, and affected states. Keep real destinations, semantics, keyboard focus, and factual content. Reuse infrastructure and working behavior; install dependencies only within project rules. Do not fabricate client logos, awards, statistics, or testimonials.
 
-Use available browser tools to compare wide and narrow renders and exercise navigation and affected interactions. Check representative content, loading assets, and layout stability. Test the intended theme and any supported alternate theme affected by the work. Run relevant project checks.
+Run the page with available tools. Inspect the hero, middle, and ending at desktop and mobile widths, then scroll the actual scenes in both directions. Compare renders with the chosen visual intent. A successful build is only a technical check.
 
-Use measured performance evidence when available. Never infer smooth frame rates, field metrics, accessibility conformance, or award readiness from a screenshot or successful build.
+Correct the largest visible mismatch before polishing smaller details. Verify crops, line breaks, visual density, section transitions, motion pacing, and navigation. Repeat the relevant visual check after a correction; stop when the brief is fulfilled and material defects are resolved. Do not deliver a first draft solely because it compiles, or restyle indefinitely without a concrete defect.
 
-Before delivery, check whether the identity survives removal of decorative effects. Fix observable regressions and stop once the brief is satisfied. Report the implemented direction, important changes, actual checks, and remaining asset or validation needs. Do not deploy without authorization.
+If browser tools are unavailable, perform supported source checks and identify the visual checks still needed. Report actual evidence, not invented visual scores, guaranteed awards, or measured performance you did not measure.

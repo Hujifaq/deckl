@@ -24,6 +24,12 @@ Establish:
 
 Infer these from the brief and project where possible. Ask only when missing information would materially change the work. A request to refine UI authorizes relevant edits; it does not authorize publishing, replacing the product, or unrelated rewrites.
 
+## Preserve the strongest parts
+
+Before editing, identify the elements that make this interface attractive: distinctive type, strong imagery, intentional color, unusual composition, texture, or an effective motion sequence. Treat these as assets to preserve unless the user rejects them. Capture before views at representative desktop and mobile sizes when tools permit.
+
+For each substantial change, state the visible weakness it corrects and the existing strength it must retain. Do not remove personality because it violates a generic anti-slop preference. If the page is already strong, improve specific defects instead of replacing its visual language.
+
 ## 2. Diagnose before styling
 
 Find the most consequential problems. Describe each as an observed issue, its effect on the user, and an appropriate correction. Do not manufacture findings to meet a quota.
@@ -54,7 +60,7 @@ Use the user's references as evidence of intent. Preserve an intentionally playf
 - Use semantic controls and accessible names. Preserve keyboard navigation, visible focus, and readable contrast.
 - Make layout decisions responsive to content: allow wrapping, flexible sizing, and deliberate overflow behavior instead of shrinking everything to fit.
 - Give affected interactive components appropriate loading, empty, error, success, and disabled states. Do not add a new state system to an unrelated component.
-- Add motion only when it clarifies feedback, continuity, or hierarchy. Respect reduced-motion preferences and keep essential content available without animation.
+- Use motion for feedback, continuity, hierarchy, and brand expression when the brief calls for it. For an explicitly requested showcase, develop a meaningful entry/development/exit scene rather than adding the same fade-up everywhere. Respect reduced-motion preferences and keep essential content available without animation.
 - Use external assets only when appropriate to the task and their use is permitted. Do not add dependencies solely to create a decorative effect.
 
 Avoid superficial fixes that conceal defects, such as globally hiding horizontal overflow, removing focus outlines, or reducing font size until a broken layout fits.
@@ -65,7 +71,7 @@ Read [verification](references/verification.md) and apply the checks relevant to
 
 Inspect the affected interface at narrow and wide widths when possible. Exercise the changed interactions. Run the project's relevant checks; use behavior tests when interaction logic changes rather than adding tests that merely repeat style values.
 
-Compare the result against the original problem and the user's scope. Fix discovered regressions. Stop when the requested issues are resolved and relevant checks pass; do not keep restyling an acceptable result to demonstrate activity.
+Compare before and after at the same viewport and state. Assess identity, composition, typography, imagery, and interaction separately. Revise or undo your own changes if they flatten an original strength without solving a demonstrated problem; preserve unrelated user edits. Compare the result against the original problem and the user's scope. Fix discovered regressions. Stop when the requested issues are resolved and relevant checks pass; do not keep restyling an acceptable result to demonstrate activity.
 
 ## Handoff
 

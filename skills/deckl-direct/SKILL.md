@@ -35,6 +35,10 @@ Define:
 
 For modern minimal briefs, favor clear hierarchy, deliberate negative space, disciplined type, and strong real imagery. Minimalism removes competing signals; it does not hide useful information or make text tiny. Avoid automatic beige palettes, serif inserts, numbered sections, and ornamental micro-labels when they have no connection to the concept.
 
+## Make ambitious briefs concrete
+
+For a requested expressive showcase, include a scene outline: what the visitor sees on entry, what changes with scroll, and how the scene resolves. Describe the static and mobile composition alongside it. Reference principles should produce specific choices in scale, crop, reading order, and timing. Quietness is not the default measure of quality.
+
 ## Deliver
 
 Present a compact, actionable direction brief. Separate existing decisions, proposed decisions, and missing assets. State font or asset licensing uncertainty rather than treating paid resources as available.

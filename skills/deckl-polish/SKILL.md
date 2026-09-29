@@ -13,6 +13,10 @@ Read project instructions and inspect the affected routes and shared components.
 
 List concrete inconsistencies before editing. Prioritize issues that affect reading, interaction, or the impression of finish. For review-only requests, deliver this list without edits.
 
+## Preserve approved character
+
+Keep before views when possible. Identify the approved type, image treatment, expressive layout, and motion details that give the page its identity. Finish these rather than normalizing them into a different aesthetic. If a cleanup makes the composition less expressive or less balanced, correct your own change. Judge before and after at the same viewport and scroll position.
+
 ## Correct the details
 
 - Optical alignment: align icon/text pairs, button labels, baselines, and image edges; check the actual rendered result rather than numeric equality alone.

@@ -58,3 +58,19 @@ Do not reduce design quality to the absence of a particular color, font, or layo
 ## Release gate
 
 The skill loads and invokes in each advertised host; all resource links resolve; requested refinements improve representative interfaces; important interactions remain intact; review-only requests do not edit; limitations are reported honestly. Fix demonstrated failures before adding more rules.
+
+## Regression suite for the expressive-design revision
+
+These cases are required evidence before describing the revision as proven to improve visual results. They have not yet been run as independent model-driven website builds.
+
+| Starting project and request | Evidence to collect | Reject the result when |
+| --- | --- | --- |
+| An already beautiful colorful editorial site; refine its crowded navigation | Matching before/after views and keyboard navigation | Its distinctive typography, color, crops, or composition are flattened without a demonstrated need |
+| A studio portfolio with six supplied project images; substantially redesign with scroll storytelling | Hero, middle, footer, and scene entry/midpoint/exit at desktop and mobile | It repeats a generic card grid, implements only fade-ups, or loses project URLs |
+| A physical product with three detail photos; expressive presentation | Coherent image sequence, readable specifications, functioning inquiry action | It invents product imagery or produces a long pinned scene with no narrative progression |
+| A cultural event with bold identity; improve layout | Preserved expression, readable schedule, mobile ordering | It imposes beige minimalism or makes practical information hard to find |
+| Scroll scene with reduced motion, direct entry, and route re-entry | Interaction recording and lifecycle checks | Content disappears, pins remain stale, or keyboard focus enters unreachable panels |
+
+Compare baseline and revised skills from identical project snapshots using the same model, prompt, assets, and tools. Test Astra and a selected Claude model separately; record the exact model names rather than assuming equivalence. Retain the output even when it fails.
+
+Ask a reviewer to compare unlabeled results for brand specificity, composition, typography, imagery, motion pacing, mobile quality, and preservation of existing strengths. Record preferred/tied/worse with concrete reasons for each dimension. A technically passing build cannot override a visually worse assessment. Revise based on observed failures; do not claim the most animations or a self-assigned numeric score proves improvement.

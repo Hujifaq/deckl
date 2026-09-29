@@ -37,3 +37,16 @@ Remove redundant labels, empty containers, gratuitous symbols, and repeated prom
 ## Practical finish
 
 Look at the top, middle, and bottom as one page. Check whether navigation, form fields, project details, legal links, and mobile states belong to the same visual system. A beautiful opening with unfinished supporting sections is not a finished website.
+
+## Compose an expressive showcase
+
+These are starting structures to adapt, not fixed page templates:
+
+- **Editorial studio:** a strong statement intersects a project image; selected work alternates immersive media and compact index information; the ending makes contact unmistakable.
+- **Material product:** an object establishes silhouette; surface and making reveal its character; specifications resolve practical questions; purchase or inquiry remains easy to reach.
+- **Cultural program:** poster-like typography and expressive color introduce the event; a readable schedule creates dense rhythm; artist imagery and venue information provide contrast.
+- **Architecture portfolio:** spatial photography carries the opening; off-center captions and measured plans support a sequence of projects; compact practice information completes the story.
+
+Tune proportions using actual assets. For an editorial desktop composition, a 12-column grid can establish shared alignment while a focal image occupies 7–9 columns and copy occupies a smaller counterweight. This is a sketching aid, not a global token rule; mobile needs its own reading order. Use overlapping type only when contrast and wrapping remain controlled.
+
+Before coding every section, resolve the opening and one representative body composition. Carry their rules through the page. Avoid three unrelated ideas in one viewport, identical section silhouettes throughout the page, and a hero that promises craft the rest of the site does not deliver.
