@@ -1,52 +1,25 @@
-# Composition decisions
+# Composition without a house layout
 
-Use this as a selection aid, not a library of mandatory templates.
+This is a way to make decisions, not a catalog of layouts to reproduce.
 
-## Choose the opening from the strongest evidence
+## Discover the visual opportunity
 
-| Available material | Useful opening | Common failure |
-| --- | --- | --- |
-| Strong objects, spaces, or photography | Let the subject carry scale; provide a clear message and action nearby. | Generic stock art with unrelated floating UI. |
-| A distinctive argument or point of view | A confident typographic opening with deliberate line lengths. | Giant vague words that say nothing about the product. |
-| A working interactive product | An actual product view or truthful demonstration with a concise explanation. | A decorative fake dashboard presented as proof. |
-| A portfolio of strong work | Introduce the practice and bring selected work into the opening experience. | A full screen of biography before any evidence of the work. |
-| Limited assets | Build clarity through type, sequence, and useful content; identify a specific missing asset. | Random abstract blobs or excessive ornament to conceal missing content. |
+Study the rendered page, actual content, and available assets. What deserves attention? What already creates recognition? Where does reading or exploration lose momentum? A site's strongest starting point might be an image, typography, interaction, color, spatial arrangement, or a relationship between them.
 
-## Page rhythm
+Consider alternatives that change the composition itself: focal placement, relationship of text and media, depth, scale, density, continuity, or the order in which content becomes visible. Choose the direction that best expresses the subject and makes the next action understandable. Do not default to text on the left and imagery on the right—or ban that arrangement when it is genuinely appropriate.
 
-Alternate attention and explanation where the story warrants it. A large image can establish an impression; a compact specification can answer practical questions. A quiet region gives the next focal moment weight. Constant oversized type or animation flattens the hierarchy.
+## Develop a visual language
 
-Create contrast through content scale, image proportion, alignment, and density before switching backgrounds. Section variation should feel like one identity speaking at different volumes, not several templates joined together.
+Let the chosen idea determine alignment, type roles, palette, cropping, surfaces, and spacing. Establish enough continuity for the page to feel authored while allowing its content to change the arrangement. A grid can support freedom without dictating a fixed number of columns. Overlap, empty space, full-bleed media, unusual type, and color transitions are available decisions, not required signatures.
 
-Keep comparable items comparable. Pricing, specifications, and repeated project records may benefit from consistent rows or grids. Do not force asymmetry into a comparison task.
+Premium execution can be playful, dense, colorful, cinematic, or quiet. Judge it by control of proportion, rhythm, detail, and interaction. Avoid treating any font, color, card shape, or hero structure as proof of AI authorship.
 
-## Signature detail
+## Compose the whole journey
 
-A strong detail expresses the subject. Examples include a before/after control for restoration work, a material close-up sequence for a craft product, or an index that previews selected portfolio work. These are optional examples, not default features.
+Read the page as an experience: how attention begins, develops, pauses, and resolves. Let different information take different forms where useful; preserve consistent comparison for equivalent items. There is no mandatory alternation, section count, or hero/body/footer visual recipe.
 
-Ask what remains on touch devices, without hover, under reduced motion, and before all media loads. If the concept disappears entirely, strengthen its static composition.
+Design the narrow-screen interpretation from reading order and focal relationships. It may need a different arrangement rather than a scaled-down desktop. Preserve useful content and navigation.
 
-## Image direction
+## Compare actual results
 
-Choose consistent lighting, crop logic, tone, and subject scale. An image should earn its area by conveying information or atmosphere. Preserve focal subjects when adapting crops. Never stretch assets to fill a planned box or hide poor source resolution with heavy filters.
-
-## Restraint
-
-Remove redundant labels, empty containers, gratuitous symbols, and repeated promises. Keep useful context, visible navigation, readable captions, and clear actions. Large blank regions need a compositional purpose; they are not a shortcut to luxury.
-
-## Practical finish
-
-Look at the top, middle, and bottom as one page. Check whether navigation, form fields, project details, legal links, and mobile states belong to the same visual system. A beautiful opening with unfinished supporting sections is not a finished website.
-
-## Compose an expressive showcase
-
-These are starting structures to adapt, not fixed page templates:
-
-- **Editorial studio:** a strong statement intersects a project image; selected work alternates immersive media and compact index information; the ending makes contact unmistakable.
-- **Material product:** an object establishes silhouette; surface and making reveal its character; specifications resolve practical questions; purchase or inquiry remains easy to reach.
-- **Cultural program:** poster-like typography and expressive color introduce the event; a readable schedule creates dense rhythm; artist imagery and venue information provide contrast.
-- **Architecture portfolio:** spatial photography carries the opening; off-center captions and measured plans support a sequence of projects; compact practice information completes the story.
-
-Tune proportions using actual assets. For an editorial desktop composition, a 12-column grid can establish shared alignment while a focal image occupies 7–9 columns and copy occupies a smaller counterweight. This is a sketching aid, not a global token rule; mobile needs its own reading order. Use overlapping type only when contrast and wrapping remain controlled.
-
-Before coding every section, resolve the opening and one representative body composition. Carry their rules through the page. Avoid three unrelated ideas in one viewport, identical section silhouettes throughout the page, and a hero that promises craft the rest of the site does not deliver.
+Inspect complete page renders and close views of important details. Does the new composition express this brand more clearly? Has it retained its strongest qualities? Do image crops, type wraps, colors, and transitions work together? Fix the largest observed weakness, then revisit the affected view. Keep a composition that works instead of changing it to satisfy a pattern quota.

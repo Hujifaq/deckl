@@ -98,6 +98,9 @@ Copying files does not confirm host discovery. See [agent compatibility](docs/co
 
 ## Build an expressive showcase
 
+**Site first, no house template.** Deckl studies the rendered site and its assets before choosing a direction. It sets no required hero alignment, grid, palette, section sequence, or animation count. Layout and motion grow from the content and the qualities worth preserving. Broad motion requests on showcase sites call for expressive choreography, including scroll-driven scenes where they fit.
+
+
 For an Awwwards-inspired redesign, start with **deckl-design**. It now develops a concrete art direction, varied page composition, and signature scroll choreography, then asks the assistant to review the actual result in the browser. For a site whose look you already like, **deckl-refine** preserves its strongest qualities and compares before and after.
 
 Choose GPT-6 Astra in Codex if available, or your preferred capable model in another assistant. Deckl supplies the design workflow; the model runs in your assistant. See [model setup and ready-to-use prompts](docs/model-workflow.md) for Astra, Claude, and other hosts.

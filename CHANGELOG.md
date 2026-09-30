@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Made rendered-site analysis the starting point for design, refinement, direction, layout, and motion.
+- Removed fixed composition examples and timing ranges; made expressive motion development the default for broad showcase motion requests.
+- Clarified creative freedom across layout, color, typography, media, and animation while preserving functional safeguards.
+
 - Reworked showcase design around reference study, expressive composition, scroll choreography, and browser review.
 - Added preservation and before/after comparison to refinement, layout, and polish.
 - Expanded motion guidance for ScrollTrigger, scene pacing, lifecycle cleanup, and responsive alternatives.

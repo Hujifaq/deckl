@@ -7,6 +7,14 @@ description: Build or substantially redesign expressive marketing websites, port
 
 Deliver a memorable, fully implemented website with a visual idea specific to its subject. The user's brief takes precedence. An ambitious showcase deserves ambitious composition and motion; do not interpret premium as automatically quiet, neutral, or static. Preserve working routes and product behavior.
 
+## Read the site before choosing its form
+
+When improving an existing site, first inspect its rendered pages with available browser tools: the opening, body, ending, navigation, a representative interaction, and a narrow viewport. Scroll through it to understand pacing and existing motion. Read the relevant source and assets alongside the render. Identify what gives it character, what feels unresolved, and what the user's request permits changing. If rendering is unavailable, distinguish source-based observations from visual judgments and continue with that limitation stated.
+
+Derive the design from this evidence. Deckl prescribes no hero alignment, image side, section order, column count, palette, font pairing, animation count, or degree of minimalism. Centered, asymmetric, layered, dense, spacious, colorful, monochrome, typographic, and immersive directions are all available. Choose relationships that make this particular content compelling. User references and explicit brand constraints take precedence.
+
+Consider materially different possibilities before committing. Avoid merely swapping colors in a familiar template, but retain familiar patterns when they serve the site. State the selected idea briefly and continue implementing when implementation was requested. Originality should be visible in the relationship between content, form, and behavior, not in random differences between sections.
+
 ## Choose a direction that earns the design
 
 Inspect the actual page, available imagery, content, and stack. On an existing site, identify its strongest qualities before replacing anything. On a new site, identify the strongest material to build around: work, product, place, process, or point of view.

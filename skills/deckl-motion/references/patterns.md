@@ -1,5 +1,7 @@
 # Motion decisions and failure checks
 
+These are implementation considerations, not a menu of required effects. First scan the site, choose an original motion idea, and use only the guidance relevant to that implementation.
+
 ## State feedback
 
 Use a brief color, opacity, or transform transition to acknowledge a state change. Keep durations coherent with the existing product. Fast feedback and longer spatial transitions may need different timing; do not apply one duration to everything.
@@ -14,7 +16,7 @@ The initial document should expose important content. Add animation only after s
 
 ## Scroll narrative
 
-Use pinning or scrubbing only when continuous progress clarifies the story. Base distances on measured content and container sizes rather than a fixed number of screens. Guard against zero or negative travel when the content already fits.
+Use pinning or scrubbing to develop a visual idea, atmosphere, or narrative when it serves the requested experience. Base distances on measured content and container sizes rather than a fixed number of screens. Guard against zero or negative travel when the content already fits.
 
 Check sticky-header offsets, font loading, resized media, and changed content. Recompute measurements through the animation system's refresh lifecycle. Ensure pin spacers and transforms are removed when a scene is disabled or unmounted.
 
@@ -38,6 +40,6 @@ Use canvas or WebGL only when the concept needs capabilities beyond ordinary lay
 
 Use a component-owned context or the framework integration for lifecycle cleanup. Use `gsap.matchMedia()` for breakpoint and reduced-motion variants and revert its work when the component unmounts. Pin a stable wrapper; transform a child. Use function-based travel and `invalidateOnRefresh` when dimensions change; skip scenes with no travel. Read the installed version's [ScrollTrigger documentation](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) and [matchMedia documentation](https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/) when implementing.
 
-Start scrubbed spatial progress with linear easing; add smoothing only if it improves control in the actual scene. Keep entrance timing separate from scroll progress. For conventional UI feedback, 120–220 ms is a useful starting range; a short editorial entrance might use 450–800 ms. These are tuning suggestions, not requirements. Long staggers should never gate the primary action.
+Start scrubbed spatial progress with linear easing; add smoothing only if it improves control in the actual scene. Keep entrance timing separate from scroll progress. Tune duration, easing, and overlap against the pace and feeling of the actual interface rather than applying a preset timing range. Long staggers should never gate the primary action.
 
 Test deep linking into the scene, reverse scroll, rapid scroll, changed viewport height, font loading, route re-entry, and reduced-motion toggling. Inspect the content at the midpoint as well as its final state. Scroll scenes must look composed throughout the journey.
