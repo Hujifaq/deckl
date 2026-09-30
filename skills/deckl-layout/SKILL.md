@@ -7,6 +7,14 @@ description: Recompose website sections and improve spacing, grids, alignment, v
 
 Make the arrangement of content feel deliberate. Prioritize the visitor's task and the page's rhythm over decorative variety.
 
+## Read the site before choosing its form
+
+When improving an existing site, first inspect its rendered pages with available browser tools: the opening, body, ending, navigation, a representative interaction, and a narrow viewport. Scroll through it to understand pacing and existing motion. Read the relevant source and assets alongside the render. Identify what gives it character, what feels unresolved, and what the user's request permits changing. If rendering is unavailable, distinguish source-based observations from visual judgments and continue with that limitation stated.
+
+Derive the design from this evidence. Deckl prescribes no hero alignment, image side, section order, column count, palette, font pairing, animation count, or degree of minimalism. Centered, asymmetric, layered, dense, spacious, colorful, monochrome, typographic, and immersive directions are all available. Choose relationships that make this particular content compelling. User references and explicit brand constraints take precedence.
+
+Consider materially different possibilities before committing. Avoid merely swapping colors in a familiar template, but retain familiar patterns when they serve the site. State the selected idea briefly and continue implementing when implementation was requested. Originality should be visible in the relationship between content, form, and behavior, not in random differences between sections.
+
 ## Map the current page
 
 Read project instructions and inspect the affected routes, sections, styles, and reusable containers. Identify content dependencies, reading order, primary actions, anchors, and responsive rules. Use a rendered view when available.

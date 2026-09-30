@@ -43,3 +43,11 @@ Use `deckl-motion` for a focused choreography pass and `deckl-polish` for final 
 - Describe a failed result concretely: which original qualities were lost, which sections feel generic, and which interactions are distracting.
 
 These instructions are designed to improve decisions, not promise an award. Evaluate the revised skills on your own starting project using the [comparison protocol](../evaluation.md). The current revision has package and structural checks; it is not a completed model benchmark.
+
+## Let the site lead
+
+Ask the assistant to scan the rendered site before making design decisions. Share what should survive and the creative freedom available. Deckl has no required text/image split, color scheme, grid, section count, or motion recipe. For broad motion work, use this brief:
+
+```text
+$deckl-motion Inspect this site's full scroll journey and interactions first. Develop and implement a distinctive motion direction that fits its identity. Explore expressive scroll choreography, transitions, and interactions without imposing a fixed pattern or repeating the same reveal. Use ScrollTrigger or a suitable engine for the chosen behavior. Tune the running result, preserve usable navigation, and create deliberate mobile and reduced-motion alternatives.
+```

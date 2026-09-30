@@ -7,22 +7,30 @@ description: Design and implement purposeful website animation, transitions, scr
 
 Use motion to express hierarchy, continuity, feedback, atmosphere, or a story grounded in the subject. Premium motion feels controlled and responsive. It should not delay access to the content.
 
+## Read the site before choosing its form
+
+When improving an existing site, first inspect its rendered pages with available browser tools: the opening, body, ending, navigation, a representative interaction, and a narrow viewport. Scroll through it to understand pacing and existing motion. Read the relevant source and assets alongside the render. Identify what gives it character, what feels unresolved, and what the user's request permits changing. If rendering is unavailable, distinguish source-based observations from visual judgments and continue with that limitation stated.
+
+Derive the design from this evidence. Deckl prescribes no hero alignment, image side, section order, column count, palette, font pairing, animation count, or degree of minimalism. Centered, asymmetric, layered, dense, spacious, colorful, monochrome, typographic, and immersive directions are all available. Choose relationships that make this particular content compelling. User references and explicit brand constraints take precedence.
+
+Consider materially different possibilities before committing. Avoid merely swapping colors in a familiar template, but retain familiar patterns when they serve the site. State the selected idea briefly and continue implementing when implementation was requested. Originality should be visible in the relationship between content, form, and behavior, not in random differences between sections.
+
 ## Inspect and specify
 
 Read project instructions and inspect the component lifecycle, existing animation dependencies, rendering boundaries, navigation behavior, and current motion preferences. Use the project's existing solution when suitable. Do not assume GSAP, Motion, or a browser automation tool exists.
 
 For each proposed effect, define the trigger, purpose, moving element, start/end state, cancellation behavior, reduced-motion alternative, and narrow-screen behavior. Keep this concise and limited to the affected features. Review-only requests receive a motion specification without edits.
 
-If the user requests ambitious scroll storytelling, implement a feature that benefits from sequence, comparison, or spatial continuity. Define entry, midpoint, exit, and reverse-scroll behavior. Consider a changing product stage, editorial image expansion, coordinated project index, or a measured gallery journey. Choose from the actual content. Repeated fade-ups alone do not satisfy this brief.
+For a broad motion request on a showcase or brand website, actively develop and implement an expressive motion direction. Study how scroll can transform the existing content, connect sections, create atmosphere, or reveal unexpected relationships. Explore an original sequence rather than picking a standard effect for every block. For a narrowly specified repair or control animation, stay within that scope. Repeated fade-ups alone do not fulfill an ambitious motion request.
 
-Give the main scene a clear progression and quieter supporting motion. Specify the intended movement and timing, then tune it in the browser. GSAP ScrollTrigger is a suitable option for coordinated pinning and scrubbing when the stack permits it; do not reject a justified animation dependency merely because the result is expressive.
+Choose how motion varies across the experience from the intended feeling and content. No fixed scene count, intensity hierarchy, or timing recipe applies. Specify the intended movement, then tune it in the browser. GSAP ScrollTrigger is a suitable option for coordinated pinning and scrubbing when the stack permits it; do not reject a justified animation dependency merely because the result is expressive.
 
 Read [motion patterns](references/patterns.md) for implementation decisions and failure checks.
 
 ## Implement progressively
 
 - Make the unanimated state complete and readable. Do not leave essential content permanently hidden when scripts fail or load late.
-- Prefer CSS for simple state transitions. Use available animation tools for complex coordination only when they reduce implementation risk.
+- Prefer CSS for simple state transitions. Choose animation tools that can express the desired choreography and integrate reliably with the project.
 - Favor transform and opacity for continuous animation; measure effects involving layout, paint, filters, masks, or large media instead of assuming they are cheap.
 - Keep high-frequency pointer or scroll values out of framework component state when an animation value or frame-coordinated update can handle them.
 - Clean up timelines, observers, listeners, and scheduled frames on unmount and route changes. Avoid duplicate initialization during development lifecycle checks.

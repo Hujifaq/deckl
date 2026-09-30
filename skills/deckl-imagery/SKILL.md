@@ -30,7 +30,7 @@ For each necessary new asset, specify its page role, subject, composition, light
 
 ## Integrate
 
-Use consistent media ratios with intentional exceptions for focal moments. Choose object-position or alternate crops to preserve the subject on mobile. Do not stretch source images or obscure them with unnecessary floating badges.
+Choose media proportions from the composition and subject; consistent ratios are useful for comparable items, not a requirement for every image. Choose object-position or alternate crops to preserve the subject on mobile. Do not stretch source images or obscure them with unnecessary floating badges.
 
 Use the project's image pipeline. Set dimensions or aspect ratios to avoid layout shifts, provide responsive sources where supported, and avoid loading every full-resolution asset upfront. Treat the primary visible image differently from below-fold media; do not lazy-load the page's critical opening image indiscriminately.
 

@@ -7,6 +7,14 @@ description: Establish an art direction for a website before implementation. Use
 
 Turn the product's identity into a specific visual idea that can guide implementation. Aim for the craft and originality associated with exceptional independent websites; do not promise an award or invent official judging scores.
 
+## Read the site before choosing its form
+
+When improving an existing site, first inspect its rendered pages with available browser tools: the opening, body, ending, navigation, a representative interaction, and a narrow viewport. Scroll through it to understand pacing and existing motion. Read the relevant source and assets alongside the render. Identify what gives it character, what feels unresolved, and what the user's request permits changing. If rendering is unavailable, distinguish source-based observations from visual judgments and continue with that limitation stated.
+
+Derive the design from this evidence. Deckl prescribes no hero alignment, image side, section order, column count, palette, font pairing, animation count, or degree of minimalism. Centered, asymmetric, layered, dense, spacious, colorful, monochrome, typographic, and immersive directions are all available. Choose relationships that make this particular content compelling. User references and explicit brand constraints take precedence.
+
+Consider materially different possibilities before committing. Avoid merely swapping colors in a familiar template, but retain familiar patterns when they serve the site. State the selected idea briefly and continue implementing when implementation was requested. Originality should be visible in the relationship between content, form, and behavior, not in random differences between sections.
+
 ## Understand
 
 Inspect the user's brief, existing interface, content, brand assets, and available project documentation. Determine whether the surface sells, showcases, informs, or supports daily work. A marketing page and its product dashboard can legitimately need different levels of expression.
@@ -26,11 +34,11 @@ Select a primary direction. If the user asks for options or the brief has a cons
 Define:
 
 - A one-sentence concept grounded in the product.
-- Three concrete visual principles, each with an implementation implication.
+- The visual principles needed to explain the concept, with concrete implementation implications.
 - Typography roles, palette roles, spacing rhythm, image treatment, and edge/surface treatment.
 - The first viewport: message, primary asset, next action, and intended balance.
 - A section sequence based on actual content and the visitor's questions.
-- One possible signature detail and why this brand earns it; omit it if it competes with the task.
+- Distinctive interactions or details that develop the concept, without a fixed count or mandated effect.
 - Touch, small-screen, reduced-motion, and lightweight alternatives for expressive features.
 
 For modern minimal briefs, favor clear hierarchy, deliberate negative space, disciplined type, and strong real imagery. Minimalism removes competing signals; it does not hide useful information or make text tiny. Avoid automatic beige palettes, serif inserts, numbered sections, and ornamental micro-labels when they have no connection to the concept.

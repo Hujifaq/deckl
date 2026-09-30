@@ -9,6 +9,14 @@ Bring an existing interface into focus. Make design decisions that serve its aud
 
 For premium brand websites, look for a stronger relationship between the product's story, type hierarchy, imagery, and composition. Remove ornamental filler and improve the moments that carry identity. For operational UI, prioritize scanability and task completion. A request for an Awwwards-inspired finish signals ambition, not permission to add effects indiscriminately or a promise of recognition.
 
+## Read the site before choosing its form
+
+When improving an existing site, first inspect its rendered pages with available browser tools: the opening, body, ending, navigation, a representative interaction, and a narrow viewport. Scroll through it to understand pacing and existing motion. Read the relevant source and assets alongside the render. Identify what gives it character, what feels unresolved, and what the user's request permits changing. If rendering is unavailable, distinguish source-based observations from visual judgments and continue with that limitation stated.
+
+Derive the design from this evidence. Deckl prescribes no hero alignment, image side, section order, column count, palette, font pairing, animation count, or degree of minimalism. Centered, asymmetric, layered, dense, spacious, colorful, monochrome, typographic, and immersive directions are all available. Choose relationships that make this particular content compelling. User references and explicit brand constraints take precedence.
+
+Consider materially different possibilities before committing. Avoid merely swapping colors in a familiar template, but retain familiar patterns when they serve the site. State the selected idea briefly and continue implementing when implementation was requested. Originality should be visible in the relationship between content, form, and behavior, not in random differences between sections.
+
 ## 1. Understand the interface
 
 Read project instructions and inspect the relevant routes, components, styles, and design tokens. Identify the framework, existing component library, and available validation commands before changing code.
@@ -44,7 +52,7 @@ For a review-only request, stop at prioritized findings and actionable recommend
 
 State the intended changes briefly before substantial edits. Tie choices to the product: a dense operations dashboard needs different pacing from a gallery or a reading interface.
 
-Choose a small set of related improvements. Establish hierarchy and layout first, typography and spacing second, then color, imagery, and interaction details as needed. For a narrow task, skip unaffected dimensions.
+Choose improvements from the observed weaknesses and creative opportunity. Layout, typography, color, imagery, and motion can develop together; follow the dependencies of the actual design rather than a fixed styling order. For a narrow task, focus on the requested dimensions.
 
 Prefer the existing visual system when it can solve the problem. Introduce new tokens or reusable components when several affected elements share the same need. Avoid abstractions for one-off decoration.
 
@@ -61,7 +69,7 @@ Use the user's references as evidence of intent. Preserve an intentionally playf
 - Make layout decisions responsive to content: allow wrapping, flexible sizing, and deliberate overflow behavior instead of shrinking everything to fit.
 - Give affected interactive components appropriate loading, empty, error, success, and disabled states. Do not add a new state system to an unrelated component.
 - Use motion for feedback, continuity, hierarchy, and brand expression when the brief calls for it. For an explicitly requested showcase, develop a meaningful entry/development/exit scene rather than adding the same fade-up everywhere. Respect reduced-motion preferences and keep essential content available without animation.
-- Use external assets only when appropriate to the task and their use is permitted. Do not add dependencies solely to create a decorative effect.
+- Use external assets only when appropriate to the task and their use is permitted. A requested expressive treatment can justify a dependency; choose it for a concrete benefit and integrate it within the project constraints.
 
 Avoid superficial fixes that conceal defects, such as globally hiding horizontal overflow, removing focus outlines, or reducing font size until a broken layout fits.
 

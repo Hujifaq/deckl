@@ -74,3 +74,7 @@ These cases are required evidence before describing the revision as proven to im
 Compare baseline and revised skills from identical project snapshots using the same model, prompt, assets, and tools. Test Astra and a selected Claude model separately; record the exact model names rather than assuming equivalence. Retain the output even when it fails.
 
 Ask a reviewer to compare unlabeled results for brand specificity, composition, typography, imagery, motion pacing, mobile quality, and preservation of existing strengths. Record preferred/tied/worse with concrete reasons for each dimension. A technically passing build cannot override a visually worse assessment. Revise based on observed failures; do not claim the most animations or a self-assigned numeric score proves improvement.
+
+## Freedom from repeated templates
+
+Run the same broad refinement and motion briefs on substantially different sites with their own assets. Compare the selected hero composition, palette, section sequence, and animation language. Reject output that follows the same text/image split or scroll recipe across unrelated subjects. Also reject arbitrary novelty that damages an already strong design. Capture full-page before/after views and motion recordings; these checks remain pending until real site trials are performed.

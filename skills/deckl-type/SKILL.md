@@ -15,7 +15,7 @@ Preserve the brand's type choice unless replacement is requested or demonstrably
 
 ## Set the system
 
-Define a concise hierarchy with clear differences in size, weight, measure, and spacing. Use fewer competing emphasis techniques. Set body readability before pushing display scale.
+Define a concise hierarchy with clear differences in size, weight, measure, and spacing. Use fewer competing emphasis techniques. Develop readable text and expressive display treatment together, checking their relationship in the actual composition.
 
 For a modern premium direction, consider strong display/body contrast, deliberate alignment, and disciplined whitespace. Choose serif, sans, or mixed roles according to the brand and content. Avoid arbitrary italic words or a novelty face solely to make a headline appear designed.
 
