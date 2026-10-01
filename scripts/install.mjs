@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readdir, lstat, mkdir, cp, rm } from 'node:fs/promises';
+import { readdir, lstat, mkdir, cp, rm, readFile, writeFile, rename, mkdtemp } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +20,8 @@ async function stat(p) {
   try { return await lstat(p); } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
 }
 
-export async function install(args, { home = homedir(), cwd = process.cwd(), log = console.log } = {}) {
+export async function install(args, { home = homedir(), cwd = process.cwd(), log = console.log, mode = 'install' } = {}) {
+  if (!['install', 'update', 'status'].includes(mode)) throw new Error('Invalid operation.');
   const available = (await readdir(source, { withFileTypes: true }))
     .filter(e => e.isDirectory()).map(e => e.name).sort();
   if (args.length === 1 && args[0] === '--help') { log(help); return; }
@@ -59,13 +60,55 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
   }
   const targets = destinations.flatMap(destination => names.map(name => ({ name, target: path.join(destination, name) })));
   const conflicts = [];
-  for (const { target } of targets) if (await stat(target)) conflicts.push(target);
-  if (conflicts.length) throw new Error(`Nothing installed. Existing destinations are preserved:\n${conflicts.join('\n')}\nCompare or move those folders before retrying.`);
-  for (const { name, target } of targets) log(`${opts.dryRun ? 'Would install' : 'Install'} ${name} → ${target}`);
-  if (opts.dryRun) return;
+  for (const { target } of targets) {
+    const info = await stat(target);
+    if (info) {
+      if (!info.isDirectory()) throw new Error(`Refusing a symlink or non-directory: ${target}`);
+      conflicts.push(target);
+    }
+  }
+  const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  if (mode === 'status') {
+    log(`Available package: ${pkg.version}`);
+    for (const { name, target } of targets) {
+      let version = conflicts.includes(target) ? 'legacy / version unknown' : 'not installed';
+      if (conflicts.includes(target)) {
+        try {
+          const marker = path.join(target, '.deckl-version.json');
+          if (!(await stat(marker))?.isFile()) throw new Error('No regular version marker');
+          const data = JSON.parse(await readFile(marker, 'utf8'));
+          if (typeof data.version === 'string' && /^[0-9A-Za-z.+-]+$/.test(data.version)) version = data.version;
+        } catch { /* Legacy or unreadable metadata. */ }
+      }
+      log(`${name}: ${version} → ${target}`);
+    }
+    log('Recorded versions do not detect local edits.');
+    return;
+  }
+  if (conflicts.length && mode === 'install') throw new Error(`Nothing installed. Existing destinations are preserved:\n${conflicts.join('\n')}\nUse deckl update with the same agent and scope to back up and replace these skills.`);
+  const backupRoot = path.join(base, '.deckl-backups');
+  if (mode === 'update' && conflicts.length) {
+    const info = await stat(backupRoot);
+    if (info && !info.isDirectory()) throw new Error(`Refusing a symlink or non-directory: ${backupRoot}`);
+  }
+  for (const { name, target } of targets) log(`${opts.dryRun ? `Would ${mode}` : mode === 'update' ? 'Update' : 'Install'} ${name} → ${target}`);
+  if (opts.dryRun) { if (mode === 'update' && conflicts.length) log(`Would back up existing folders under ${backupRoot}`); return; }
   for (const destination of destinations) await mkdir(destination, { recursive: true });
-  const created = [];
+  const created = [], moved = [];
+  let backup;
   try {
+    if (mode === 'update' && conflicts.length) {
+      await mkdir(backupRoot, { recursive: true });
+      backup = await mkdtemp(path.join(backupRoot, 'update-'));
+      // Record recovery paths before moving any originals.
+      const entries = conflicts.map((target, i) => ({ target, backup: path.join(backup, String(i)) }));
+      await writeFile(path.join(backup, 'manifest.json'), JSON.stringify({ version: pkg.version, entries }, null, 2));
+      log(`Backup: ${backup}`);
+      for (const entry of entries) {
+        await rename(entry.target, entry.backup);
+        moved.push(entry);
+      }
+    }
     for (const { name, target } of targets) {
       await mkdir(target);
       created.push(target);
@@ -74,9 +117,14 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
           recursive: true, force: false, errorOnExist: true,
         });
       }
+      await writeFile(path.join(target, '.deckl-version.json'), JSON.stringify({ version: pkg.version }, null, 2));
     }
   } catch (error) {
     const rollback = await Promise.allSettled(created.map(p => rm(p, { recursive: true, force: true })));
+    for (const entry of moved.reverse()) {
+      try { await rename(entry.backup, entry.target); }
+      catch { log(`Restore needed: ${entry.backup} → ${entry.target}`); }
+    }
     if (rollback.some(r => r.status === 'rejected')) log('Cleanup was incomplete; inspect the listed destinations.');
     throw error;
   }

@@ -15,7 +15,7 @@ test('Claude selection includes skill and supporting references', async t => {
   await install(['--agent', 'claude', '--scope', 'user', '--skill', 'deckl-refine'], options);
   const p = path.join(root, '.claude/skills/deckl-refine');
   assert.match(await readFile(path.join(p, 'SKILL.md'), 'utf8'), /name: deckl-refine/);
-  assert.equal((await readdir(path.join(p, 'references'))).length, 3);
+  assert.deepEqual((await readdir(path.join(p, 'references'))).sort(), (await readdir(new URL('../skills/deckl-refine/references/', import.meta.url))).sort());
 });
 test('Codex project path with spaces installs all ten locally', async t => {
   const { root, options } = await fixture(t);

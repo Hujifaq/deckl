@@ -96,6 +96,10 @@ Refresh the assistant, then try one of these prompts:
 
 Copying files does not confirm host discovery. See [agent compatibility](docs/compatibility.md) and [troubleshooting](#faq).
 
+## Practical design guidance
+
+The core skills now use concise decisions backed by focused references: visual exploration, production interactions, interruptible motion, and scroll-scene engineering. Creative choices remain open. See [the quality workflow](docs/quality-workflow.md) for collecting failures and comparing real results. No visual benchmark results are claimed by the installer tests.
+
 ## Build an expressive showcase
 
 **Site first, no house template.** Deckl studies the rendered site and its assets before choosing a direction. It sets no required hero alignment, grid, palette, section sequence, or animation count. Layout and motion grow from the content and the qualities worth preserving. Broad motion requests on showcase sites call for expressive choreography, including scroll-driven scenes where they fit.
@@ -235,7 +239,7 @@ deckl --help
 deckl --version
 ```
 
-The copying step runs locally with no network and no runtime dependencies. npm downloads the package normally. No `postinstall` hook writes agent files. Existing skill folders and symlink discovery directories are refused; there is no force option. If you already installed one skill, select only the new ones or deliberately replace the old copy using the steps below.
+The copying step runs locally with no network and no runtime dependencies. npm downloads the package normally. No `postinstall` hook writes agent files. Ordinary installation refuses existing skill folders. Explicit updates back them up before replacement. Symlink discovery directories are refused. If you already installed one skill, select only the new ones or deliberately replace the old copy using the steps below.
 
 ### Manual installation
 
@@ -256,21 +260,31 @@ Host documentation: [Claude Code skills](https://code.claude.com/docs/en/skills)
 
 ### Update or remove
 
-Update the global CLI and check its version:
+With the upcoming release containing update support, refresh the CLI and then update installed skills:
 
 ```sh
 npm install -g @hujifaq/deckl@latest
 deckl --version
-deckl install
+deckl update
 ```
 
-Updating the CLI does not replace skill copies already installed for your agents.
+The guided update uses arrows, Space, and Enter. Existing selected folders are backed up before replacement; local edits remain in the backup and are not merged automatically. Updating npm alone does not replace installed skill copies.
 
-Compare the installed folder with the new source first. Preserve your edits by backing up the exact installed skill folder **outside all skill discovery directories**, then move the installed folder aside and rerun the installer for that skill. Automatic merging is not provided.
+For a specific agent, inspect and preview first:
 
-To uninstall, remove only the specific Deckl skill folder you installed after preserving local edits. Refresh the assistant afterward. Do not remove the parent skills directory: it may contain other people's skills.
+```sh
+deckl status --agent codex
+deckl update --agent codex --dry-run
+deckl update --agent codex
+```
 
-`npm uninstall -g @hujifaq/deckl` removes the executable; it leaves skill copies in place. Likewise, updating the npm package does not update your installed skill folders.
+Add `--scope project` from your website directory for project skills. Repeat `--skill` to update only selected skills. Missing selected skills are installed as well. Status reports the recorded installed version, not a check for local edits; older installs display “legacy / version unknown.”
+
+Backups live in `.deckl-backups/update-*` under your home directory or project root, outside skill discovery folders. Each backup includes a `manifest.json` mapping original paths to numbered backup folders. For manual rollback, move the current affected skill folder somewhere safe, then move its numbered backup folder to the exact original path in the manifest. Refresh the assistant. Ordinary caught installation failures attempt to restore originals automatically; an interrupted process may require this manual recovery.
+
+Before this feature is published, run `node bin/deckl.mjs update` from this repository. Older published versions require moving old skill folders outside discovery directories before reinstalling.
+
+To uninstall, remove only the Deckl skill folders you selected after preserving your edits. `npm uninstall -g @hujifaq/deckl` removes the CLI and leaves skill copies and backups in place.
 
 ### Publish your own release
 
@@ -323,7 +337,7 @@ Check the exact folder hierarchy, the environment running your assistant, and it
 <details>
 <summary><strong>The installer reports an existing destination.</strong></summary>
 
-It stopped to preserve existing files. Compare that folder with the source, back up any edits outside discovery directories, and move the old folder aside before retrying. If you only want new skills, select them explicitly with repeated `--skill` options.
+It stopped to preserve existing files. Use `deckl update` in a version with update support to back up and replace selected skills. For older versions, move existing folders outside discovery directories before retrying.
 
 </details>
 

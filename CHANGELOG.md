@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Replaced repetitive core design instructions with focused decision workflows and practical supporting references.
+- Added visual exploration, production interaction, interruption, and scroll-engineering guidance.
+- Added guided `deckl update`, automatic backups, failure recovery, and `deckl status` version reporting.
+- Added a reproducible quality-comparison protocol; generated-site benchmarking is still pending.
+
 - Made rendered-site analysis the starting point for design, refinement, direction, layout, and motion.
 - Removed fixed composition examples and timing ranges; made expressive motion development the default for broad showcase motion requests.
 - Clarified creative freedom across layout, color, typography, media, and animation while preserving functional safeguards.

@@ -17,6 +17,11 @@ const help = `
     deckl install --agent cursor --skill deckl-refine
     deckl install --agent claude --agent codex  Multiple agents
 
+  MAINTAIN
+    deckl update                              Guided update with backups
+    deckl update --agent codex                 Back up and replace selected skills
+    deckl status --agent codex                 Recorded installed versions
+
   OPTIONS
     --agent NAME      claude, codex, cursor, copilot, gemini, opencode
     --scope SCOPE     user (default) or project
@@ -55,14 +60,17 @@ export async function runCli(args, options = {}) {
     }
     return;
   }
-  if (command !== 'install') throw new Error(`Unknown command: ${command}. Run deckl --help.`);
+  if (!['install', 'update', 'status'].includes(command)) throw new Error(`Unknown command: ${command}. Run deckl --help.`);
   if (flags.includes('--help')) { log(help); return; }
-  if (!flags.includes('--agent')) return setup(flags, options);
+  if (!flags.includes('--agent')) {
+    if (command === 'status') throw new Error('Choose an agent: deckl status --agent codex');
+    return setup(flags, { ...options, mode: command });
+  }
   const normalized = [...flags];
     if (!normalized.includes('--scope')) normalized.push('--scope', 'user');
     const scope = normalized[normalized.indexOf('--scope') + 1];
     if (scope === 'project' && !normalized.includes('--project')) normalized.push('--project', options.cwd ?? process.cwd());
-    return await install(normalized, options);
+    return await install(normalized, { ...options, mode: command });
 }
 
 if (process.argv[1] && await realpath(path.resolve(process.argv[1])) === fileURLToPath(import.meta.url)) {

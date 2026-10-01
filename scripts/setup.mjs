@@ -51,6 +51,7 @@ export function choose({ input, output, title, step, items, multiple = false, de
 }
 
 export async function setup(flags, options = {}) {
+  const updating = options.mode === 'update';
   const input = options.input ?? process.stdin, output = options.output ?? process.stdout;
   const log = options.log ?? console.log;
   if (!input.isTTY || !output.isTTY || typeof input.setRawMode !== 'function') throw new Error('Guided setup needs a terminal. Use deckl install --agent claude for a noninteractive install.');
@@ -91,9 +92,9 @@ export async function setup(flags, options = {}) {
     // Run the real preflight before confirmation; this does not write files.
     await install([...normalized, '--dry-run'], { ...options, log() {} });
     const base = scope === 'user' ? options.home ?? homedir() : path.resolve(options.cwd ?? process.cwd(), values['--project'] ?? '.');
-    confirmed = await menu({ title: dryRun ? 'Preview ready' : 'Ready to install', step: '04',
-      items: [{ value: true, label: dryRun ? 'Show destinations and finish' : `Install ${chosen.length} skills for ${ids.length} agent${ids.length === 1 ? '' : 's'}` }, { value: false, label: 'Cancel' }],
-      notes: [`${ids.map(id => agents[id].label).join(', ')}`, `Scope: ${scope} · ${base}`, 'Existing skill folders are preserved.'] });
+    confirmed = await menu({ title: dryRun ? 'Preview ready' : updating ? 'Ready to update' : 'Ready to install', step: '04',
+      items: [{ value: true, label: dryRun ? 'Show destinations and finish' : `${updating ? 'Update' : 'Install'} ${chosen.length} skills for ${ids.length} agent${ids.length === 1 ? '' : 's'}` }, { value: false, label: 'Cancel' }],
+      notes: [`${ids.map(id => agents[id].label).join(', ')}`, `Scope: ${scope} · ${base}`, updating ? 'Existing folders are backed up, then replaced. Local edits stay in the backup.' : 'Existing skill folders are preserved.'] });
     if (dryRun) normalized.push('--dry-run');
   } catch (error) {
     if (!(error instanceof Cancelled)) throw error;

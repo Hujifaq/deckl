@@ -53,9 +53,9 @@ Users can launch setup with `npx @hujifaq/deckl@latest install`, or update the g
 ```sh
 npm install -g @hujifaq/deckl@latest
 deckl --version
-deckl install
+deckl update
 ```
 
-Updating the command does not replace existing skill copies. Preserve any local edits before moving an installed skill folder aside and installing the new copy.
+Updating the command does not replace existing skill copies. With update support, run `deckl update` to back up and replace selected installed skills. See the README for recovery instructions.
 
 References: [scoped public packages](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages/), [package executables and files](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/).
