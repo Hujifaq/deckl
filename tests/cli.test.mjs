@@ -25,7 +25,7 @@ for (const [id, agent] of Object.entries(agents)) {
       const base = scope === 'user' ? home : project;
       const skill = path.join(base, agent[scope], 'deckl-refine');
       assert.match(await readFile(path.join(skill, 'SKILL.md'), 'utf8'), /name: deckl-refine/);
-      assert.equal((await readdir(path.join(skill, 'references'))).length, 3);
+      assert.deepEqual((await readdir(path.join(skill, 'references'))).sort(), (await readdir(new URL('../skills/deckl-refine/references/', import.meta.url))).sort());
       assert.deepEqual(await readdir(scope === 'user' ? project : home), []);
     });
   }
@@ -68,4 +68,37 @@ test('CLI defaults to user scope and honors dry-run', async t => {
   const { root, options } = await fixture(t);
   await runCli(['install', '--agent', 'claude', '--dry-run'], options);
   assert.deepEqual(await readdir(root), []);
+});
+
+test('update preserves custom files in backup and records the new version', async t => {
+  const { root, options, logs } = await fixture(t);
+  const folder = path.join(root, '.agents/skills/deckl-design');
+  await mkdir(folder, { recursive: true });
+  await writeFile(path.join(folder, 'SKILL.md'), 'my old skill');
+  await writeFile(path.join(folder, 'custom.txt'), 'my notes');
+  await runCli(['status', '--agent', 'codex', '--skill', 'deckl-design'], options);
+  assert.ok(logs.some(x => x.includes('legacy / version unknown')));
+  await runCli(['update', '--agent', 'codex', '--skill', 'deckl-design', '--dry-run'], options);
+  assert.equal(await readFile(path.join(folder, 'SKILL.md'), 'utf8'), 'my old skill');
+  await assert.rejects(readdir(path.join(root, '.deckl-backups')), { code: 'ENOENT' });
+  await runCli(['update', '--agent', 'codex', '--skill', 'deckl-design'], options);
+  const [batch] = await readdir(path.join(root, '.deckl-backups'));
+  const manifest = JSON.parse(await readFile(path.join(root, '.deckl-backups', batch, 'manifest.json'), 'utf8'));
+  assert.equal(manifest.entries[0].target, folder);
+  assert.equal(await readFile(path.join(manifest.entries[0].backup, 'custom.txt'), 'utf8'), 'my notes');
+  assert.equal(await readFile(path.join(manifest.entries[0].backup, 'SKILL.md'), 'utf8'), 'my old skill');
+  assert.match(await readFile(path.join(folder, 'SKILL.md'), 'utf8'), /name: deckl-design/);
+  const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  assert.equal(JSON.parse(await readFile(path.join(folder, '.deckl-version.json'), 'utf8')).version, pkg.version);
+});
+
+test('update refuses a symlink backup root before touching existing skills', async t => {
+  const { root, options } = await fixture(t);
+  const folder = path.join(root, '.agents/skills/deckl-type');
+  await mkdir(folder, { recursive: true });
+  await writeFile(path.join(folder, 'SKILL.md'), 'original');
+  await mkdir(path.join(root, 'elsewhere'));
+  await symlink(path.join(root, 'elsewhere'), path.join(root, '.deckl-backups'));
+  await assert.rejects(runCli(['update', '--agent', 'codex', '--skill', 'deckl-type'], options), /symlink/);
+  assert.equal(await readFile(path.join(folder, 'SKILL.md'), 'utf8'), 'original');
 });
