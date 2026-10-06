@@ -102,3 +102,16 @@ test('update refuses a symlink backup root before touching existing skills', asy
   await assert.rejects(runCli(['update', '--agent', 'codex', '--skill', 'deckl-type'], options), /symlink/);
   assert.equal(await readFile(path.join(folder, 'SKILL.md'), 'utf8'), 'original');
 });
+
+test('completion guidance uses selected skills and the agent invocation syntax', async t => {
+  const { logs, options } = await fixture(t);
+  const args = ['install', '--agent', 'codex', '--skill', 'deckl-motion'];
+  await runCli([...args, '--dry-run'], options);
+  assert.ok(!logs.some(line => line.includes('Where to start')));
+  logs.length = 0;
+  await runCli(args, options);
+  const prompt = logs.find(line => line.startsWith('Codex:'));
+  assert.ok(prompt.startsWith('Codex: $deckl-motion '));
+  assert.match(prompt, /motion/i);
+  assert.ok(!logs.some(line => line.includes('deckl-refine') || line.includes('deckl-design')));
+});

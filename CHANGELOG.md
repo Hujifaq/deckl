@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Added a starting-skill guide and post-install recommendations tailored to selected skills, with task-appropriate prompts for each agent.
+
+- Added guidance for all models to avoid decorative number–dash and number–line section labels, with simple text alternatives and meaningful numbering preserved.
+
 - Added a GPT-specific rule across all skills to avoid 45-degree diagonal UI arrows, including icon and SVG equivalents.
 
 - Replaced repetitive core design instructions with focused decision workflows and practical supporting references.
