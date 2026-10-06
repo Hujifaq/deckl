@@ -14,14 +14,7 @@ Turn a brief or existing interface into distinctive, coherent, professionally fi
 
 ## Start here
 
-| Your task | Start with |
-| --- | --- |
-| Make an existing interface better | [deckl-refine](skills/deckl-refine/SKILL.md) |
-| Build or substantially redesign a website | [deckl-design](skills/deckl-design/SKILL.md) |
-| Find what needs improvement before editing | [deckl-audit](skills/deckl-audit/SKILL.md) |
-| Decide what the website should feel like | [deckl-direct](skills/deckl-direct/SKILL.md) |
-
-Choose the skill that matches the job. You do not need to run all ten.
+Building a new website or changing its direction? Start with **deckl-design**. Improving a site you already like? Start with **deckl-refine**. See [Choose your starting skill](#choose-your-starting-skill) for a quick guide and example prompts.
 
 ## Quick start
 
@@ -95,6 +88,34 @@ Refresh the assistant, then try one of these prompts:
 | Gemini CLI / OpenCode | `Use the deckl-refine skill to improve the hierarchy, typography, and spacing.` |
 
 Copying files does not confirm host discovery. See [agent compatibility](docs/compatibility.md) and [troubleshooting](#faq).
+
+## Choose your starting skill
+
+Start with the task in front of you. Installing all ten skills gives you choices; you do not need to run them all.
+
+| What you need | Start with | Boundary |
+| --- | --- | --- |
+| Build a new website or completely change its visual direction | [deckl-design](skills/deckl-design/SKILL.md) | A new concept or an authorized overhaul. |
+| Improve an existing site while keeping its identity | [deckl-refine](skills/deckl-refine/SKILL.md) | Preserve the good parts and working behavior. |
+| Add or repair animation and scroll storytelling | [deckl-motion](skills/deckl-motion/SKILL.md) | Improve motion within the established design. |
+| Finish a design before release | [deckl-polish](skills/deckl-polish/SKILL.md) | Correct details rather than start another redesign. |
+| Find out what needs improvement | [deckl-audit](skills/deckl-audit/SKILL.md) | Review and prioritize; read-only by default. |
+
+For example, in Claude Code or Cursor:
+
+```text
+/deckl-refine Improve this site while preserving its visual identity and working controls. Inspect it first and keep its strongest details.
+```
+
+Review that result. If motion is the next issue, continue in the same conversation:
+
+```text
+/deckl-motion Add scroll storytelling that fits the established design, with mobile and reduced-motion alternatives.
+```
+
+Use `deckl-polish` afterward only when there are finishing details to fix. Stop when the result meets the brief; repeated design passes can weaken a coherent direction. For a narrow problem, choose the relevant specialist: `deckl-type`, `deckl-layout`, `deckl-imagery`, or `deckl-adapt`. Use `deckl-direct` when you need an art direction before implementation.
+
+In Codex, use `$deckl-refine` or `$deckl-motion`; see the agent prompt table above for other hosts. After a successful install or update, the CLI shows starting recommendations for the skills you selected and a prompt using your agent's syntax. A preview or cancelled setup does not show completion guidance.
 
 ## Practical design guidance
 

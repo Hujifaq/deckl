@@ -129,8 +129,32 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
     throw error;
   }
   log(`\nCopied ${names.length} skills for ${agentIds.length} agent${agentIds.length === 1 ? '' : 's'}. Refresh your assistant.`);
-  const example = names.includes('deckl-refine') ? 'deckl-refine' : names[0];
-  for (const id of agentIds) log(`${agents[id].label}: ${agents[id].prompt.replace('deckl-refine', example)}`);
+  const startingSkills = {
+    'deckl-design': ['New website or a new visual direction', 'Build a distinctive website around my real content and assets.'],
+    'deckl-refine': ['Improve an existing site', 'Improve this site while preserving its visual identity and working controls.'],
+    'deckl-motion': ['Animation or scroll storytelling', 'Improve motion to fit this design, including mobile and reduced-motion alternatives.'],
+    'deckl-polish': ['Finish an established design', 'Polish the details of this established design before release.'],
+    'deckl-audit': ['Review before making changes', 'Review this site and prioritize improvements without editing it.'],
+    'deckl-direct': ['Choose an art direction', 'Develop an art direction for this website before implementation.'],
+    'deckl-type': ['Typography and readability', 'Improve typography and readability within this design.'],
+    'deckl-layout': ['Composition and spacing', 'Improve composition and spacing while preserving this site’s identity.'],
+    'deckl-imagery': ['Imagery and asset treatment', 'Improve imagery, crops, and media treatment for this website.'],
+    'deckl-adapt': ['Mobile and touch', 'Adapt this website for mobile and touch while preserving its identity.'],
+  };
+  const core = ['deckl-design', 'deckl-refine', 'deckl-motion', 'deckl-polish', 'deckl-audit'];
+  const recommendations = core.filter(name => names.includes(name));
+  if (!recommendations.length) recommendations.push(...names);
+  log('\nWhere to start — choose one skill for the task:');
+  for (const name of recommendations) log(`  ${startingSkills[name][0]}: ${name}`);
+  log('Use a specialist only when needed. You do not need to run every skill.');
+  const example = names.includes('deckl-refine') ? 'deckl-refine' : recommendations[0];
+  log('\nTry this in your website project after refreshing your assistant:');
+  for (const id of agentIds) {
+    const template = agents[id].prompt;
+    const prefix = template.slice(0, template.indexOf('deckl-refine'));
+    const prompt = `${prefix}${example}${template.startsWith('Use the ') ? ' skill.' : ''} ${startingSkills[example][1]}`;
+    log(`${agents[id].label}: ${prompt}`);
+  }
   log('Installation is complete. Live host discovery is not verified by this installer.');
 }
 

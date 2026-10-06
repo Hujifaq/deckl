@@ -2,6 +2,10 @@
 
 Deckl supplies design instructions to the model running in your coding assistant. It does not bundle a model, change the model selector, or make API calls. Select the model in your assistant, then invoke the relevant skill in the website project.
 
+## Minimal section labels for all models
+
+Avoid decorative number–dash labels and number–line–label layouts, including zero-padded counters such as `01 — About`. Use a concise category label or a clear heading, with typography and whitespace establishing hierarchy. Keep numbers that communicate meaningful steps, order, ranks, dates, or data. This preference applies to every model using Deckl and yields to explicit user direction; review-only skills report the pattern without modifying the site.
+
 ## GPT icon preference
 
 Deckl's skills instruct GPT models to avoid 45-degree diagonal arrows in generated UI, including Unicode glyphs, icon-library components, SVG paths, and rotated arrows. Prefer text labels, with horizontal arrows or chevrons only where useful. This applies within the requested scope and can be overridden by an explicit user request. Audit-only skills report violations without changing the site.
