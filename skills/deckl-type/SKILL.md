@@ -7,6 +7,10 @@ description: Improve website typography, font roles, headline wrapping, reading 
 
 Use typography to give the interface hierarchy, rhythm, and character. A premium result depends on proportion and execution, not on selecting a fashionable font.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Inspect
 
 Read project instructions. Inspect actual content, font assets and licenses, font-loading strategy, existing tokens, supported languages, and affected components. View the rendered interface when tools are available. Identify the roles of display text, headings, body, controls, captions, and numerical data.

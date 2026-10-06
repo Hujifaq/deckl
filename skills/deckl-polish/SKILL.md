@@ -7,6 +7,10 @@ description: Apply a final craft pass to an already established website before h
 
 Finish the details that make a coherent design feel deliberate. Preserve the chosen direction. Do not substitute a new aesthetic during the final pass.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Inspect the whole surface
 
 Read project instructions and inspect the affected routes and shared components. Review top, middle, bottom, navigation, and secondary states when browser tools are available. Check project conventions and available validation commands.

@@ -2,6 +2,10 @@
 
 Deckl supplies design instructions to the model running in your coding assistant. It does not bundle a model, change the model selector, or make API calls. Select the model in your assistant, then invoke the relevant skill in the website project.
 
+## GPT icon preference
+
+Deckl's skills instruct GPT models to avoid 45-degree diagonal arrows in generated UI, including Unicode glyphs, icon-library components, SVG paths, and rotated arrows. Prefer text labels, with horizontal arrows or chevrons only where useful. This applies within the requested scope and can be overridden by an explicit user request. Audit-only skills report violations without changing the site.
+
 ## GPT-6 Astra
 
 Use GPT-6 Astra when it is available in your Codex model selector. For a substantial redesign, a higher reasoning setting can be worth trying; compare results on your project rather than assuming more reasoning guarantees better taste. Give it visual references, real assets, and a browser preview it can inspect.

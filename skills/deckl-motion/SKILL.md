@@ -7,6 +7,10 @@ description: Design and implement website motion, from responsive product intera
 
 Make motion belong to the interface. A showcase may benefit from surprise and immersive scroll choreography; frequently used product controls need predictable, immediate response. Neither style is a universal default.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Inspect before choreographing
 
 Watch the existing page and affected interactions when browser tools are available. Inspect the component lifecycle, state, dependencies, content, and responsive behavior. Identify the visual qualities and interactions worth preserving.

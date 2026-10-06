@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added a GPT-specific rule across all skills to avoid 45-degree diagonal UI arrows, including icon and SVG equivalents.
+
 - Replaced repetitive core design instructions with focused decision workflows and practical supporting references.
 - Added visual exploration, production interaction, interruption, and scroll-engineering guidance.
 - Added guided `deckl update`, automatic backups, failure recovery, and `deckl status` version reporting.

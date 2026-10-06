@@ -7,6 +7,10 @@ description: Build or substantially redesign a website with a distinct visual di
 
 Create a site whose visual choices belong to its subject. User requirements lead; Deckl has no mandatory hero alignment, palette, grid, font pairing, or animation quota.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Establish the ground
 
 Inspect the rendered site and relevant source, routes, design system, content, and assets. Review the opening, body, ending, navigation, and mobile view. For a new project, start with the brief and material available. Identify the purpose: an expressive showcase invites exploration; a product interface supports repeated tasks. Preserve working behavior and any identity the user wants retained.
