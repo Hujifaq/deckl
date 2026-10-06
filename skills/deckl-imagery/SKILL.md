@@ -7,6 +7,10 @@ description: Art-direct website photography, product imagery, project presentati
 
 Make the subject feel specific and tangible. A strong asset can carry more identity than layers of decorative UI.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Inventory and intention
 
 Read project instructions and inspect available assets, actual content, brand references, media components, and the relevant page. Identify which images provide evidence, which explain something, and which establish atmosphere. Preserve those distinctions.

@@ -7,6 +7,10 @@ description: Improve an existing interface while preserving its successful ident
 
 Improve the site that exists. Begin with evidence, protect its strongest qualities, and make changes that solve a visible or behavioral problem. No preferred hero, palette, or layout is imposed.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Diagnose the real weakness
 
 Inspect the relevant rendered page and source, including representative mobile and interaction states. Identify what should survive: type, image treatment, composition, color, density, or motion. Check which skill instructions are active when results seem inexplicably constrained; do not silently edit other installed skills.

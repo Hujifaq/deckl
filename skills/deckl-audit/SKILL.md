@@ -7,6 +7,10 @@ description: Review a website's art direction, originality, hierarchy, typograph
 
 Assess whether the website feels intentional, distinctive, and usable. Diagnose causes rather than labeling a design "AI-generated" from its appearance. Do not claim an official Awwwards score, likely award, or AI-authorship detection.
 
+## GPT-specific icon rule
+
+When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+
 ## Gather evidence
 
 Read project instructions and the user's brief. Inspect the relevant routes, brand constraints, content, assets, and design conventions. View the rendered interface when tools permit, including supporting sections and narrow-screen behavior. Inspect source to connect symptoms to likely causes.
