@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added art-directed parallax guidance to `deckl-motion`, covering local scroll progress, crop limits, layer ownership, mobile behavior, and reduced-motion alternatives without prescribing fixed visual patterns.
+
 - Added a starting-skill guide and post-install recommendations tailored to selected skills, with task-appropriate prompts for each agent.
 
 - Added guidance for all models to avoid decorative number–dash and number–line section labels, with simple text alternatives and meaningful numbering preserved.
