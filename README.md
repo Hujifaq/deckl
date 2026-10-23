@@ -119,22 +119,27 @@ In Codex, use `$deckl-refine` or `$deckl-motion`; see the agent prompt table abo
 
 ## Practical design guidance
 
-The core skills now use concise decisions backed by focused references: visual exploration, production interactions, interruptible motion, and scroll-scene engineering. Creative choices remain open. See [the quality workflow](docs/quality-workflow.md) for collecting failures and comparing real results. No visual benchmark results are claimed by the installer tests.
+The core skills use concise decisions backed by focused references: visual exploration, production interactions, interruptible motion, and scroll-scene engineering. Creative choices remain open. Concrete help is included where it saves guesswork:
+
+- **Motion toolbox** in `deckl-motion`: starting durations and easing, reduced-motion patterns, CSS scroll-driven animation, view transitions, `@starting-style`, interruptible animation, and a ScrollTrigger scene with cleanup.
+- **Generic patterns** in `deckl-design`, `deckl-refine`, and `deckl-audit`: common defaults that make a site look assembled, each with a stronger alternative and the context where it is fine.
+- **Capture script** in the design, refine, motion, adapt, polish, and audit skills: if your project already has Playwright, the assistant can capture 390px and 1440px views, scroll sequences, and reduced-motion renders, and report overflow, script errors, failed requests, and missing alt text. It never edits the project, and the skills do not install Playwright without your agreement.
+
+See [the quality workflow](docs/quality-workflow.md) for collecting failures and comparing real results. No visual benchmark results are claimed by the tests.
 
 ## Build an expressive showcase
 
 **Site first, no house template.** Deckl studies the rendered site and its assets before choosing a direction. It sets no required hero alignment, grid, palette, section sequence, or animation count. Layout and motion grow from the content and the qualities worth preserving. Broad motion requests on showcase sites call for expressive choreography, including scroll-driven scenes where they fit.
 
+For an Awwwards-inspired redesign, start with **deckl-design**. It develops a concrete art direction, varied page composition, and signature scroll choreography, then asks the assistant to review the actual result in the browser. For a site whose look you already like, **deckl-refine** preserves its strongest qualities and compares before and after.
 
-For an Awwwards-inspired redesign, start with **deckl-design**. It now develops a concrete art direction, varied page composition, and signature scroll choreography, then asks the assistant to review the actual result in the browser. For a site whose look you already like, **deckl-refine** preserves its strongest qualities and compares before and after.
-
-Choose GPT-6 Astra in Codex if available, or your preferred capable model in another assistant. Deckl supplies the design workflow; the model runs in your assistant. See [model setup and ready-to-use prompts](docs/model-workflow.md) for Astra, Claude, and other hosts.
+Use the strongest capable model your assistant offers. Deckl supplies the design workflow; the model runs in your assistant. See [model setup and ready-to-use prompts](docs/model-workflow.md) for current model suggestions per host.
 
 ```text
 $deckl-design Redesign this site as an expressive showcase using the supplied references and real assets. Preserve its strongest qualities and working actions. Build distinctive composition and a signature scroll narrative. Inspect desktop and mobile renders, test the motion, and correct visible regressions before finishing.
 ```
 
-In Claude Code, use `/deckl-design`. These revised instructions are under **Unreleased** until a new npm version is published. Updating the npm command alone does not replace installed skill copies; follow [Update or remove](#update-or-remove) or test from this checkout in a fresh project.
+In Claude Code, use `/deckl-design`. Updating the npm command alone does not replace installed skill copies; follow [Update or remove](#update-or-remove). Changes listed under **Unreleased** in the [changelog](CHANGELOG.md) reach npm with the next published version; to try them earlier, install from this checkout with `node bin/deckl.mjs`.
 
 ## Skills
 
@@ -260,7 +265,7 @@ deckl --help
 deckl --version
 ```
 
-The copying step runs locally with no network and no runtime dependencies. npm downloads the package normally. No `postinstall` hook writes agent files. Ordinary installation refuses existing skill folders. Explicit updates back them up before replacement. Symlink discovery directories are refused. If you already installed one skill, select only the new ones or deliberately replace the old copy using the steps below.
+The copying step runs locally with no network and no runtime dependencies. npm downloads the package normally. No `postinstall` hook writes agent files. Ordinary installation refuses existing skill folders. Explicit updates and uninstalls back them up first. Symlink discovery directories are refused, hidden metadata files are not copied, and printed paths are stripped of terminal control characters. If you already installed one skill, select only the new ones or deliberately replace the old copy using the steps below.
 
 ### Manual installation
 
@@ -281,7 +286,7 @@ Host documentation: [Claude Code skills](https://code.claude.com/docs/en/skills)
 
 ### Update or remove
 
-With the upcoming release containing update support, refresh the CLI and then update installed skills:
+Refresh the CLI, then update installed skills (available since 1.2.0):
 
 ```sh
 npm install -g @hujifaq/deckl@latest
@@ -303,9 +308,16 @@ Add `--scope project` from your website directory for project skills. Repeat `--
 
 Backups live in `.deckl-backups/update-*` under your home directory or project root, outside skill discovery folders. Each backup includes a `manifest.json` mapping original paths to numbered backup folders. For manual rollback, move the current affected skill folder somewhere safe, then move its numbered backup folder to the exact original path in the manifest. Refresh the assistant. Ordinary caught installation failures attempt to restore originals automatically; an interrupted process may require this manual recovery.
 
-Before this feature is published, run `node bin/deckl.mjs update` from this repository. Older published versions require moving old skill folders outside discovery directories before reinstalling.
+Versions before 1.2.0 have no update command; move old skill folders outside discovery directories before reinstalling.
 
-To uninstall, remove only the Deckl skill folders you selected after preserving your edits. `npm uninstall -g @hujifaq/deckl` removes the CLI and leaves skill copies and backups in place.
+To uninstall skills, preview first, then remove:
+
+```sh
+deckl uninstall --agent codex --dry-run
+deckl uninstall --agent codex
+```
+
+Add `--scope project` for project skills and repeat `--skill` to remove only some. Removed folders move to `.deckl-backups/uninstall-*` with a manifest, so local edits are recoverable; delete that folder when you no longer need it. Uninstall refuses a folder whose `SKILL.md` does not name the matching Deckl skill. `npm uninstall -g @hujifaq/deckl` removes the CLI and leaves skill copies and backups in place.
 
 ### Publish your own release
 
@@ -358,7 +370,7 @@ Check the exact folder hierarchy, the environment running your assistant, and it
 <details>
 <summary><strong>The installer reports an existing destination.</strong></summary>
 
-It stopped to preserve existing files. Use `deckl update` in a version with update support to back up and replace selected skills. For older versions, move existing folders outside discovery directories before retrying.
+It stopped to preserve existing files. Use `deckl update` (1.2.0 or later) to back up and replace selected skills. For older versions, move existing folders outside discovery directories before retrying.
 
 </details>
 
@@ -394,14 +406,20 @@ If it is not listed, the version is not available through that lookup yet. An au
 
 Open this folder in VS Code. Each command's instructions live in `skills/<name>/SKILL.md`. Keep the folder name and YAML `name` identical, and keep references inside their owning skill.
 
-Run the installer checks from this folder:
+Some content is shared by several skills and generated from `shared/`: the house rules, the site-first section, the generic-pattern reference, and the capture script. Edit the file in `shared/`, never a skill's copy, then run:
+
+```sh
+npm run sync
+```
+
+Run the checks from this folder:
 
 ```sh
 npm test
 npm pack --dry-run
 ```
 
-The tests use temporary directories and cover all six adapters in both scopes, CLI behavior, multiple-agent preflight, conflicts, invalid inputs, dry runs, repeat installs, and symlink rejection. They do not test design quality or live assistant discovery.
+`npm test` first fails if any skill copy differs from `shared/`. The tests use temporary directories and cover all six adapters in both scopes, CLI behavior, multiple-agent preflight, conflicts, invalid inputs, dry runs, repeat installs, update, uninstall, symlink rejection, terminal-output sanitizing, skill metadata, internal links, and capture-script argument handling. They do not test design quality or live assistant discovery.
 
 Use [evaluation.md](evaluation.md) for behavioral testing.
 
@@ -418,21 +436,24 @@ deckl/
 ├── assets/deckl-install.svg
 ├── docs/comparison.md
 ├── docs/compatibility.md
+├── docs/model-workflow.md
 ├── docs/publishing.md
+├── docs/quality-workflow.md
 ├── bin/deckl.mjs
 ├── scripts/agents.mjs
 ├── scripts/install.mjs
 ├── scripts/setup.mjs
 ├── scripts/setup-view.mjs
-├── tests/cli.test.mjs
-├── tests/install.test.mjs
+├── shared/               (source for generated skill copies; not published)
+├── tools/sync-shared.mjs (not published)
+├── tests/*.test.mjs
 └── skills/
-    └── deckl-*/SKILL.md  (+ references where needed)
+    └── deckl-*/SKILL.md  (+ references/ and scripts/ where needed)
 ```
 
 ## Project status
 
-**Included:** ten skills, six agent adapters, an npm executable with guided setup, an MIT license, supporting references, workflow examples, installer tests, and a publishing guide.
+**Included:** ten skills, six agent adapters, an npm executable with guided setup, update, status, and uninstall, an MIT license, supporting references, an optional capture script, workflow examples, tests, and a publishing guide.
 
 **Still to validate:** live discovery and invocation in each advertised host, and real design outcomes. See [the changelog](CHANGELOG.md).
 

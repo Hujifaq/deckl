@@ -14,7 +14,7 @@ node bin/deckl.mjs install --dry-run
 npm pack --dry-run
 ```
 
-Use arrows, Space, and Enter to preview setup. Escape or Ctrl+C cancels. Inspect the package list for `bin/deckl.mjs`, `scripts/setup.mjs`, the installer, six adapters, all ten skills and references, README, and MIT license.
+Use arrows, Space, and Enter to preview setup. Escape or Ctrl+C cancels. Inspect the package list for `bin/deckl.mjs`, `scripts/setup.mjs`, the installer, six adapters, all ten skills with their references and `scripts/inspect.mjs` copies, README, and MIT license. `shared/`, `tools/`, `tests/`, and `.DS_Store` files must not appear. `npm test` confirms that the skill copies match `shared/`.
 
 ## Choose a fresh version
 

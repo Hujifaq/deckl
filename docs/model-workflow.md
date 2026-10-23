@@ -2,13 +2,14 @@
 
 Deckl supplies design instructions to the model running in your coding assistant. It does not bundle a model, change the model selector, or make API calls. Select the model in your assistant, then invoke the relevant skill in the website project.
 
-## Minimal section labels for all models
+## House rules for all models
 
-Avoid decorative number–dash labels and number–line–label layouts, including zero-padded counters such as `01 — About`. Use a concise category label or a clear heading, with typography and whitespace establishing hierarchy. Keep numbers that communicate meaningful steps, order, ranks, dates, or data. This preference applies to every model using Deckl and yields to explicit user direction; review-only skills report the pattern without modifying the site.
+Every skill carries two short rules, generated from `shared/blocks/rules.md`:
 
-## GPT icon preference
+- **No diagonal arrows.** Avoid 45-degree arrows in generated UI, including Unicode glyphs, icon-library components, SVG paths, and rotated arrows. Prefer text labels, with horizontal arrows or chevrons only where useful. This began as a GPT-specific rule; it now applies to every model, because a skill cannot reliably tell which model is running it.
+- **No decorative section numbers.** Avoid number–dash labels and number–line–label layouts, including zero-padded counters such as `01 — About`. Use a concise category label or a clear heading. Keep numbers that communicate meaningful steps, order, ranks, dates, or data.
 
-Deckl's skills instruct GPT models to avoid 45-degree diagonal arrows in generated UI, including Unicode glyphs, icon-library components, SVG paths, and rotated arrows. Prefer text labels, with horizontal arrows or chevrons only where useful. This applies within the requested scope and can be overridden by an explicit user request. Audit-only skills report violations without changing the site.
+Both apply within the requested scope and yield to explicit user direction; review-only skills report violations without modifying the site.
 
 ## GPT-6 Astra
 

@@ -14,16 +14,39 @@ Usage: node scripts/install.mjs --agent NAME --scope user|project [options]
   --dry-run       Show destinations without writing
   --list          List available skills
   --help          Show this help
-Existing skill folders are never overwritten. No network access is used.`;
+Install never overwrites existing skill folders; update and uninstall back them up first. No network access is used.`;
+
+// Paths can come from directory names; strip terminal control characters before printing them.
+export const printable = value => String(value).replace(/[\x00-\x09\x0b-\x1f\x7f-\x9f]/g, '');
+// Editor and OS metadata such as .DS_Store stays out of installed skills.
+const visible = file => !path.basename(file).startsWith('.');
 
 async function stat(p) {
   try { return await lstat(p); } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
 }
 
-export async function install(args, { home = homedir(), cwd = process.cwd(), log = console.log, mode = 'install' } = {}) {
-  if (!['install', 'update', 'status'].includes(mode)) throw new Error('Invalid operation.');
+// Records recovery paths before any original is moved.
+async function startBackup(backupRoot, kind, targets, version, log) {
+  await mkdir(backupRoot, { recursive: true });
+  const backup = await mkdtemp(path.join(backupRoot, `${kind}-`));
+  const entries = targets.map((target, i) => ({ target, backup: path.join(backup, String(i)) }));
+  await writeFile(path.join(backup, 'manifest.json'), JSON.stringify({ version, entries }, null, 2));
+  log(`Backup: ${backup}`);
+  return { backup, entries };
+}
+
+async function restore(moved, log) {
+  for (const entry of moved.reverse()) {
+    try { await rename(entry.backup, entry.target); }
+    catch { log(`Restore needed: ${entry.backup} → ${entry.target}`); }
+  }
+}
+
+export async function install(args, { home = homedir(), cwd = process.cwd(), log: rawLog = console.log, mode = 'install' } = {}) {
+  if (!['install', 'update', 'status', 'uninstall'].includes(mode)) throw new Error('Invalid operation.');
+  const log = value => rawLog(printable(value));
   const available = (await readdir(source, { withFileTypes: true }))
-    .filter(e => e.isDirectory()).map(e => e.name).sort();
+    .filter(e => e.isDirectory() && visible(e.name)).map(e => e.name).sort();
   if (args.length === 1 && args[0] === '--help') { log(help); return; }
   if (args.length === 1 && args[0] === '--list') { log(available.join('\n')); return; }
   const opts = {}, selected = [], requestedAgents = [];
@@ -87,23 +110,18 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
   }
   if (conflicts.length && mode === 'install') throw new Error(`Nothing installed. Existing destinations are preserved:\n${conflicts.join('\n')}\nUse deckl update with the same agent and scope to back up and replace these skills.`);
   const backupRoot = path.join(base, '.deckl-backups');
-  if (mode === 'update' && conflicts.length) {
+  if (mode !== 'install' && conflicts.length) {
     const info = await stat(backupRoot);
     if (info && !info.isDirectory()) throw new Error(`Refusing a symlink or non-directory: ${backupRoot}`);
   }
+  if (mode === 'uninstall') return uninstall({ targets, conflicts, backupRoot, dryRun: opts.dryRun, version: pkg.version, log });
   for (const { name, target } of targets) log(`${opts.dryRun ? `Would ${mode}` : mode === 'update' ? 'Update' : 'Install'} ${name} → ${target}`);
   if (opts.dryRun) { if (mode === 'update' && conflicts.length) log(`Would back up existing folders under ${backupRoot}`); return; }
   for (const destination of destinations) await mkdir(destination, { recursive: true });
   const created = [], moved = [];
-  let backup;
   try {
     if (mode === 'update' && conflicts.length) {
-      await mkdir(backupRoot, { recursive: true });
-      backup = await mkdtemp(path.join(backupRoot, 'update-'));
-      // Record recovery paths before moving any originals.
-      const entries = conflicts.map((target, i) => ({ target, backup: path.join(backup, String(i)) }));
-      await writeFile(path.join(backup, 'manifest.json'), JSON.stringify({ version: pkg.version, entries }, null, 2));
-      log(`Backup: ${backup}`);
+      const { entries } = await startBackup(backupRoot, 'update', conflicts, pkg.version, log);
       for (const entry of entries) {
         await rename(entry.target, entry.backup);
         moved.push(entry);
@@ -112,19 +130,16 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
     for (const { name, target } of targets) {
       await mkdir(target);
       created.push(target);
-      for (const entry of await readdir(path.join(source, name))) {
+      for (const entry of (await readdir(path.join(source, name))).filter(visible)) {
         await cp(path.join(source, name, entry), path.join(target, entry), {
-          recursive: true, force: false, errorOnExist: true,
+          recursive: true, force: false, errorOnExist: true, filter: visible,
         });
       }
       await writeFile(path.join(target, '.deckl-version.json'), JSON.stringify({ version: pkg.version }, null, 2));
     }
   } catch (error) {
     const rollback = await Promise.allSettled(created.map(p => rm(p, { recursive: true, force: true })));
-    for (const entry of moved.reverse()) {
-      try { await rename(entry.backup, entry.target); }
-      catch { log(`Restore needed: ${entry.backup} → ${entry.target}`); }
-    }
+    await restore(moved, log);
     if (rollback.some(r => r.status === 'rejected')) log('Cleanup was incomplete; inspect the listed destinations.');
     throw error;
   }
@@ -158,6 +173,38 @@ export async function install(args, { home = homedir(), cwd = process.cwd(), log
   log('Installation is complete. Live host discovery is not verified by this installer.');
 }
 
+// Moves installed skills into a backup instead of deleting them.
+async function uninstall({ targets, conflicts, backupRoot, dryRun, version, log }) {
+  const present = targets.filter(({ target }) => conflicts.includes(target));
+  for (const { name, target } of targets) if (!conflicts.includes(target)) log(`Not installed: ${name} → ${target}`);
+  if (!present.length) { log('Nothing to remove.'); return; }
+  // Only remove a folder that identifies itself as the same Deckl skill.
+  for (const { name, target } of present) {
+    const file = path.join(target, 'SKILL.md');
+    const text = (await stat(file))?.isFile() ? await readFile(file, 'utf8') : '';
+    if (!text.split('\n').some(line => line.trim() === `name: ${name}`)) {
+      throw new Error(`Nothing removed. ${target} does not look like the ${name} skill; inspect it manually.`);
+    }
+  }
+  for (const { name, target } of present) log(`${dryRun ? 'Would remove' : 'Remove'} ${name} → ${target}`);
+  if (dryRun) { log(`Would back up removed folders under ${backupRoot}`); return; }
+  const moved = [];
+  let backup;
+  try {
+    const started = await startBackup(backupRoot, 'uninstall', present.map(p => p.target), version, log);
+    backup = started.backup;
+    for (const entry of started.entries) {
+      await rename(entry.target, entry.backup);
+      moved.push(entry);
+    }
+  } catch (error) {
+    await restore(moved, log);
+    throw error;
+  }
+  log(`\nRemoved ${present.length} skill${present.length === 1 ? '' : 's'}. Refresh your assistant.`);
+  log(`The removed folders are kept in ${backup}. Delete that folder when you no longer need them.`);
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  install(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });
+  install(process.argv.slice(2)).catch(error => { console.error(printable(error.message)); process.exitCode = 1; });
 }

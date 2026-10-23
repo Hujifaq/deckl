@@ -7,14 +7,16 @@ description: Recompose website sections and improve spacing, grids, alignment, v
 
 Make the arrangement of content feel deliberate. Prioritize the visitor's task and the page's rhythm over decorative variety.
 
-## GPT-specific icon rule
+<!-- shared:rules -->
+## House rules
 
-When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+- **No diagonal arrows.** Do not add 45-degree arrows to UI: ↗ ↘ ↖ ↙ glyphs, icons such as `ArrowUpRight`, or rotated SVG/CSS arrows, including external-link indicators and hover states. Use a clear label; add a horizontal arrow or chevron only when it signals an action.
+- **No decorative section numbers.** Avoid labels such as `01 — About`, a number joined to a rule and a label, or zero-padded counters used only for an editorial look. Use a plain category label or a descriptive heading without substituting another ornament. Keep numbers that convey real order, steps, ranks, dates, or data.
 
-## Section labels for all models
+Explicit user requests override these rules. Apply them within the task's scope; in review-only work, report violations without editing.
+<!-- /shared:rules -->
 
-Do not add decorative section numbers paired with a dash or horizontal rule, such as `01 — The everyday`, `01 -- About`, or a number followed by a CSS/SVG line and a label. Avoid automatic zero-padded chapter counters used only to signal an editorial look. Prefer a concise category label or a descriptive heading in natural case, with restrained typography and whitespace. Do not replace this with mandatory dots, pills, or other ornaments. Keep numbering when it conveys real order, steps, ranks, dates, or data, or when explicitly requested. Apply changes within the task's scope; review-only skills flag this pattern without editing.
-
+<!-- shared:site-first -->
 ## Read the site before choosing its form
 
 When improving an existing site, first inspect its rendered pages with available browser tools: the opening, body, ending, navigation, a representative interaction, and a narrow viewport. Scroll through it to understand pacing and existing motion. Read the relevant source and assets alongside the render. Identify what gives it character, what feels unresolved, and what the user's request permits changing. If rendering is unavailable, distinguish source-based observations from visual judgments and continue with that limitation stated.
@@ -22,6 +24,7 @@ When improving an existing site, first inspect its rendered pages with available
 Derive the design from this evidence. Deckl prescribes no hero alignment, image side, section order, column count, palette, font pairing, animation count, or degree of minimalism. Centered, asymmetric, layered, dense, spacious, colorful, monochrome, typographic, and immersive directions are all available. Choose relationships that make this particular content compelling. User references and explicit brand constraints take precedence.
 
 Consider materially different possibilities before committing. Avoid merely swapping colors in a familiar template, but retain familiar patterns when they serve the site. State the selected idea briefly and continue implementing when implementation was requested. Originality should be visible in the relationship between content, form, and behavior, not in random differences between sections.
+<!-- /shared:site-first -->
 
 ## Map the current page
 
@@ -46,6 +49,7 @@ Identify what already works in the rendered page before rearranging it. Preserve
 ## Implement
 
 - Prefer Grid or Flexbox relationships that adapt to real content. Avoid absolute positioning for text blocks that must grow.
+- Use container queries (`container-type: inline-size` with `@container`) for components placed in containers of different widths, and `subgrid` when nested items must share the parent's alignment lines.
 - Remove nested surfaces when proximity or alignment communicates the same relationship; retain boundaries around independent interactive objects.
 - Use content-aware section spacing. Do not create giant empty gaps simply to signal luxury.
 - Plan the opening at ordinary laptop heights as well as wide presentation sizes. Avoid a headline that pushes every useful detail out of view.

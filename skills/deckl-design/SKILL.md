@@ -1,19 +1,20 @@
 ---
 name: deckl-design
-description: Build or substantially redesign a website with a distinct visual direction, responsive composition, and working interactions. Use for a new site or an authorized visual overhaul.
+description: Build a new website or substantially redesign one with a distinct visual direction, responsive composition, and working interactions. Use for a new landing page, portfolio, product, or marketing site, an Awwwards-style showcase, implementing a rebrand, or making a generic or AI-looking site distinctive when a visual overhaul is authorized. Not for small fixes to a design that should be kept.
 ---
 
 # Deckl Design
 
 Create a site whose visual choices belong to its subject. User requirements lead; Deckl has no mandatory hero alignment, palette, grid, font pairing, or animation quota.
 
-## GPT-specific icon rule
+<!-- shared:rules -->
+## House rules
 
-When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+- **No diagonal arrows.** Do not add 45-degree arrows to UI: ↗ ↘ ↖ ↙ glyphs, icons such as `ArrowUpRight`, or rotated SVG/CSS arrows, including external-link indicators and hover states. Use a clear label; add a horizontal arrow or chevron only when it signals an action.
+- **No decorative section numbers.** Avoid labels such as `01 — About`, a number joined to a rule and a label, or zero-padded counters used only for an editorial look. Use a plain category label or a descriptive heading without substituting another ornament. Keep numbers that convey real order, steps, ranks, dates, or data.
 
-## Section labels for all models
-
-Do not add decorative section numbers paired with a dash or horizontal rule, such as `01 — The everyday`, `01 -- About`, or a number followed by a CSS/SVG line and a label. Avoid automatic zero-padded chapter counters used only to signal an editorial look. Prefer a concise category label or a descriptive heading in natural case, with restrained typography and whitespace. Do not replace this with mandatory dots, pills, or other ornaments. Keep numbering when it conveys real order, steps, ranks, dates, or data, or when explicitly requested. Apply changes within the task's scope; review-only skills flag this pattern without editing.
+Explicit user requests override these rules. Apply them within the task's scope; in review-only work, report violations without editing.
+<!-- /shared:rules -->
 
 ## Establish the ground
 
@@ -39,6 +40,8 @@ For requested expressive motion, use [scroll choreography](references/scroll-cho
 
 ## Finish through evidence
 
-Compare the running result with the direction and, for redesigns, the original at matching sizes and states. Identify the largest mismatch: weak focus, awkward type wrapping, poor crop, repetitive rhythm, distracting motion, or unfinished support UI. Correct it and revisit that area. A compile success cannot establish visual quality.
+Compare the running result with the direction and, for redesigns, the original at matching sizes and states. Identify the largest mismatch: weak focus, awkward type wrapping, poor crop, repetitive rhythm, distracting motion, or unfinished support UI. Check the result against [generic patterns](references/anti-patterns.md) that nothing in the brief motivates. Correct the largest problem and revisit that area. A compile success cannot establish visual quality.
+
+If the project already has Playwright, `scripts/inspect.mjs` in this skill's folder captures matching views: run `node <skill-folder>/scripts/inspect.mjs <url> --label before` from the project root before redesigning and `--label after` when done. It reports horizontal overflow, script errors, failed requests, and images without alt text, writes to a temporary folder, and edits nothing. Do not install Playwright without the user's agreement; use the host's browser tools when available.
 
 Exercise affected navigation and primary actions; inspect narrow and intermediate widths, keyboard focus, loading/error states, and reduced motion as relevant. Preserve the user's unrelated edits. Report what changed, what was actually inspected, and specific remaining limitations. Finish when the intended experience works and observed defects are resolved, rather than after an arbitrary number of passes.
