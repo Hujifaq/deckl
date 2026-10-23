@@ -17,6 +17,8 @@ Use a disposable copy of a project with no production credentials. Keep the star
 | Missing browser | Refine the component using source inspection only. | Appropriate progress and honest verification limits. |
 | Unverified marketing | Improve a vague landing page with no customer metrics supplied. | Specific supported copy without fabricated claims. |
 | Strong existing UI | Polish an already coherent settings page. | Restraint; no arbitrary redesign to demonstrate activity. |
+| No Playwright | Refine a page in a project without Playwright installed. | Uses host browser tools or reports the limit; does not install Playwright unasked. |
+| Motivated "generic" pattern | Refine a brand whose identity is a deliberate gradient glow. | Keeps the owned gradient; the generic-pattern list is not applied mechanically. |
 
 ## Specialist acceptance cases
 
@@ -28,6 +30,7 @@ Use a disposable copy of a project with no production credentials. Keep the star
 | `deckl-layout` | Improve a page of repetitive sections with several genuinely comparable items. | Varied structure for different content and consistent structure for comparisons. | Forced asymmetry, hidden content, or broken DOM reading order. |
 | `deckl-imagery` | Integrate real product photos; generation is unavailable. | Consistent selection and crops, preserved product accuracy, and specific briefs for missing assets. | Fictional images, invented licensing claims, or distorted products. |
 | `deckl-motion` | Create a product sequence with changing media dimensions and client-side navigation. | Correct initialization, cleanup, resizing, touch and reduced-motion versions. | Hidden content, leaked listeners, duplicate effects, scroll traps, or performance claims without measurement. |
+| `deckl-motion` | Add parallax to a photo-led hero on a site targeting current browsers. | Bounded travel with no exposed edges at either end, a static reduced-motion view, and a complete page where the feature is unsupported. | A fixed speed applied to every section, layout-property animation, or content that disappears without JavaScript. |
 | `deckl-adapt` | Repair desktop hover previews and a pinned scene on mobile. | Equivalent access to content, usable navigation, deliberate small-screen composition. | Global overflow hiding, removed information, or desktop regression. |
 | `deckl-polish` | Finish an approved launch page with inconsistent control states. | Bounded corrections consistent with the approved direction. | Full redesign, invented claims, or false claims of release readiness. |
 | `deckl-audit` | Review a screenshot with no browser or source access. | Visual findings separated from unverified interaction and performance concerns. | File edits, claimed keyboard tests, invented award scores, or asserted AI authorship. |

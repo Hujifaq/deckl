@@ -7,6 +7,7 @@ Start with a real design failure and identify the smallest instruction that woul
 1. Edit `skills/<name>/SKILL.md`. Keep its YAML `name` identical to the folder name.
 2. Explain when to use it in the description. State whether its default output is a brief, critique, or implementation.
 3. Keep supporting references inside that skill and link them relatively. Avoid dependencies on sibling skills.
+   Content used by several skills lives in `shared/`: the house rules, the site-first section, the generic-pattern reference, and the capture script. Edit it there, list new targets in `tools/sync-shared.mjs`, and run `npm run sync`. Do not edit the generated copies; `npm test` fails when they drift.
 4. Add a realistic case to [evaluation.md](evaluation.md), including a case where the new instruction should not apply.
 5. Compare baseline and skill-assisted results. Record the model, tools, budget, observed results, and checks you could not run.
 
@@ -21,7 +22,7 @@ node bin/deckl.mjs list
 node bin/deckl.mjs install --agent claude --dry-run
 ```
 
-Tests use temporary directories. Preserve the no-overwrite behavior and validate inputs before writing. Do not introduce automatic network requests or installation side effects.
+Tests use temporary directories. Preserve the no-overwrite behavior and validate inputs before writing. Route printed output through the installer's sanitizing log so paths cannot carry terminal control sequences. Do not introduce automatic network requests, runtime dependencies, or installation side effects. The capture script must stay optional and must never install Playwright itself.
 
 ## Change documentation
 

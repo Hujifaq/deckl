@@ -2,7 +2,7 @@
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { readFile, realpath } from 'node:fs/promises';
-import { install } from '../scripts/install.mjs';
+import { install, printable } from '../scripts/install.mjs';
 import { agents } from '../scripts/agents.mjs';
 import { setup } from '../scripts/setup.mjs';
 
@@ -21,6 +21,7 @@ const help = `
     deckl update                              Guided update with backups
     deckl update --agent codex                 Back up and replace selected skills
     deckl status --agent codex                 Recorded installed versions
+    deckl uninstall --agent codex              Move selected skills into a backup
 
   OPTIONS
     --agent NAME      claude, codex, cursor, copilot, gemini, opencode
@@ -60,19 +61,19 @@ export async function runCli(args, options = {}) {
     }
     return;
   }
-  if (!['install', 'update', 'status'].includes(command)) throw new Error(`Unknown command: ${command}. Run deckl --help.`);
+  if (!['install', 'update', 'status', 'uninstall'].includes(command)) throw new Error(`Unknown command: ${command}. Run deckl --help.`);
   if (flags.includes('--help')) { log(help); return; }
   if (!flags.includes('--agent')) {
-    if (command === 'status') throw new Error('Choose an agent: deckl status --agent codex');
+    if (command === 'status' || command === 'uninstall') throw new Error(`Choose an agent: deckl ${command} --agent codex`);
     return setup(flags, { ...options, mode: command });
   }
   const normalized = [...flags];
-    if (!normalized.includes('--scope')) normalized.push('--scope', 'user');
-    const scope = normalized[normalized.indexOf('--scope') + 1];
-    if (scope === 'project' && !normalized.includes('--project')) normalized.push('--project', options.cwd ?? process.cwd());
-    return await install(normalized, { ...options, mode: command });
+  if (!normalized.includes('--scope')) normalized.push('--scope', 'user');
+  const scope = normalized[normalized.indexOf('--scope') + 1];
+  if (scope === 'project' && !normalized.includes('--project')) normalized.push('--project', options.cwd ?? process.cwd());
+  return await install(normalized, { ...options, mode: command });
 }
 
 if (process.argv[1] && await realpath(path.resolve(process.argv[1])) === fileURLToPath(import.meta.url)) {
-  runCli(process.argv.slice(2)).catch(error => { console.error(`\nDeckl: ${error.message}`); process.exitCode = 1; });
+  runCli(process.argv.slice(2)).catch(error => { console.error(`\nDeckl: ${printable(error.message)}`); process.exitCode = 1; });
 }

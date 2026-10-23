@@ -16,6 +16,17 @@ Use the project's normal launch and validation commands. Preserve existing proce
 - Check supported themes affected by new colors or surfaces.
 - Consider browser zoom and reduced motion where relevant.
 
+### Optional capture script
+
+If the project already has Playwright, run this skill's `scripts/inspect.mjs` from the project root:
+
+```sh
+node <skill-folder>/scripts/inspect.mjs http://localhost:3000 --label before
+node <skill-folder>/scripts/inspect.mjs http://localhost:3000 --label after --out <same folder as before>
+```
+
+It captures the top and the full page at 390 and 1440 CSS pixels (change with `--widths`) and reports horizontal overflow with likely sources, script errors, failed requests, and images without alt text. `--reduced-motion` emulates the preference; `--scroll-steps N` adds frames down the page; `--channel chrome` uses an installed Chrome. It writes to a temporary folder unless `--out` is given and never edits the project. Look at the images: the report flags mechanical problems, not visual quality. Do not install Playwright without the user's agreement.
+
 ## Behavior checks
 
 - Exercise the affected links, buttons, forms, menus, or dialogs.

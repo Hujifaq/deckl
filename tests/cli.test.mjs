@@ -25,7 +25,7 @@ for (const [id, agent] of Object.entries(agents)) {
       const base = scope === 'user' ? home : project;
       const skill = path.join(base, agent[scope], 'deckl-refine');
       assert.match(await readFile(path.join(skill, 'SKILL.md'), 'utf8'), /name: deckl-refine/);
-      assert.deepEqual((await readdir(path.join(skill, 'references'))).sort(), (await readdir(new URL('../skills/deckl-refine/references/', import.meta.url))).sort());
+      assert.deepEqual((await readdir(path.join(skill, 'references'))).sort(), (await readdir(new URL('../skills/deckl-refine/references/', import.meta.url))).filter(n => !n.startsWith('.')).sort());
       assert.deepEqual(await readdir(scope === 'user' ? project : home), []);
     });
   }
@@ -114,4 +114,48 @@ test('completion guidance uses selected skills and the agent invocation syntax',
   assert.ok(prompt.startsWith('Codex: $deckl-motion '));
   assert.match(prompt, /motion/i);
   assert.ok(!logs.some(line => line.includes('deckl-refine') || line.includes('deckl-design')));
+});
+
+test('uninstall moves Deckl skills into a backup and leaves others alone', async t => {
+  const { root, options, logs } = await fixture(t);
+  await runCli(['install', '--agent', 'claude', '--skill', 'deckl-type', '--skill', 'deckl-layout'], options);
+  const skills = path.join(root, agents.claude.user);
+  await runCli(['uninstall', '--agent', 'claude', '--skill', 'deckl-type', '--dry-run'], options);
+  assert.deepEqual((await readdir(skills)).sort(), ['deckl-layout', 'deckl-type']);
+  await assert.rejects(readdir(path.join(root, '.deckl-backups')), { code: 'ENOENT' });
+  await runCli(['uninstall', '--agent', 'claude', '--skill', 'deckl-type', '--skill', 'deckl-motion'], options);
+  assert.deepEqual(await readdir(skills), ['deckl-layout']);
+  assert.ok(logs.some(line => line.startsWith('Not installed: deckl-motion')));
+  const [batch] = await readdir(path.join(root, '.deckl-backups'));
+  assert.match(batch, /^uninstall-/);
+  const manifest = JSON.parse(await readFile(path.join(root, '.deckl-backups', batch, 'manifest.json'), 'utf8'));
+  assert.match(await readFile(path.join(manifest.entries[0].backup, 'SKILL.md'), 'utf8'), /name: deckl-type/);
+});
+
+test('uninstall refuses a folder that is not the matching Deckl skill', async t => {
+  const { root, options } = await fixture(t);
+  await runCli(['install', '--agent', 'codex', '--skill', 'deckl-layout'], options);
+  const foreign = path.join(root, agents.codex.user, 'deckl-type');
+  await mkdir(foreign); await writeFile(path.join(foreign, 'SKILL.md'), '---\nname: my-type\n---\n');
+  await assert.rejects(runCli(['uninstall', '--agent', 'codex', '--skill', 'deckl-type', '--skill', 'deckl-layout'], options), /Nothing removed/);
+  assert.deepEqual((await readdir(path.join(root, agents.codex.user))).sort(), ['deckl-layout', 'deckl-type']);
+  await assert.rejects(runCli(['uninstall'], options), /Choose an agent/);
+});
+
+test('printed paths cannot inject terminal control sequences', async t => {
+  const { root, options, logs } = await fixture(t);
+  const project = path.join(root, 'site\x1b]0;owned\x07');
+  await mkdir(project);
+  await runCli(['install', '--agent', 'claude', '--scope', 'project', '--skill', 'deckl-type', '--dry-run'], { ...options, cwd: project });
+  assert.ok(logs.length);
+  assert.ok(logs.every(line => !/[\x00-\x09\x0b-\x1f\x7f-\x9f]/.test(line)));
+});
+
+test('installed skills exclude hidden metadata files', async t => {
+  const { root, options } = await fixture(t);
+  await runCli(['install', '--agent', 'claude'], options);
+  const walk = async dir => (await readdir(dir, { withFileTypes: true })).flatMap(e => [e.name]).concat(
+    ...await Promise.all((await readdir(dir, { withFileTypes: true })).filter(e => e.isDirectory()).map(e => walk(path.join(dir, e.name)))));
+  const names = await walk(path.join(root, agents.claude.user));
+  assert.deepEqual(names.filter(n => n.startsWith('.') && n !== '.deckl-version.json'), []);
 });

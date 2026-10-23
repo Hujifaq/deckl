@@ -7,13 +7,14 @@ description: Review a website's art direction, originality, hierarchy, typograph
 
 Assess whether the website feels intentional, distinctive, and usable. Diagnose causes rather than labeling a design "AI-generated" from its appearance. Do not claim an official Awwwards score, likely award, or AI-authorship detection.
 
-## GPT-specific icon rule
+<!-- shared:rules -->
+## House rules
 
-When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+- **No diagonal arrows.** Do not add 45-degree arrows to UI: ↗ ↘ ↖ ↙ glyphs, icons such as `ArrowUpRight`, or rotated SVG/CSS arrows, including external-link indicators and hover states. Use a clear label; add a horizontal arrow or chevron only when it signals an action.
+- **No decorative section numbers.** Avoid labels such as `01 — About`, a number joined to a rule and a label, or zero-padded counters used only for an editorial look. Use a plain category label or a descriptive heading without substituting another ornament. Keep numbers that convey real order, steps, ranks, dates, or data.
 
-## Section labels for all models
-
-Do not add decorative section numbers paired with a dash or horizontal rule, such as `01 — The everyday`, `01 -- About`, or a number followed by a CSS/SVG line and a label. Avoid automatic zero-padded chapter counters used only to signal an editorial look. Prefer a concise category label or a descriptive heading in natural case, with restrained typography and whitespace. Do not replace this with mandatory dots, pills, or other ornaments. Keep numbering when it conveys real order, steps, ranks, dates, or data, or when explicitly requested. Apply changes within the task's scope; review-only skills flag this pattern without editing.
+Explicit user requests override these rules. Apply them within the task's scope; in review-only work, report violations without editing.
+<!-- /shared:rules -->
 
 ## Gather evidence
 
@@ -29,7 +30,9 @@ Read [review criteria](references/criteria.md). Evaluate the dimensions relevant
 
 For an expressive brand website, look for a coherent concept, strong content and imagery, controlled contrast and rhythm, meaningful interactions, and professional execution beyond the first viewport. For a modern minimal direction, examine whether restraint reveals the content or merely leaves it underdeveloped.
 
-Treat familiar patterns as context-dependent. Equal cards, a centered hero, a neutral font, or a gradient are findings only when they undermine hierarchy, identity, or usability. Conversely, unusual composition is not automatically good if it obscures the task.
+Treat familiar patterns as context-dependent. Equal cards, a centered hero, a neutral font, or a gradient are findings only when they undermine hierarchy, identity, or usability; [generic patterns](references/anti-patterns.md) describes common cases and stronger alternatives. Conversely, unusual composition is not automatically good if it obscures the task.
+
+If the project already has Playwright, `scripts/inspect.mjs` in this skill's folder gathers evidence without editing anything: run `node <skill-folder>/scripts/inspect.mjs <url>` from the project root for 390px and 1440px captures plus overflow, script error, failed request, and missing-alt reports. It writes only to a temporary folder. Do not install Playwright for an audit; use the host's browser tools when available.
 
 ## Report findings
 

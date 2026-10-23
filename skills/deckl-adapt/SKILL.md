@@ -7,13 +7,14 @@ description: Adapt an existing website for small screens, touch, zoom, and varia
 
 Make the design feel intentional on each relevant device. Preserve the underlying concept through content order, image framing, type hierarchy, and interaction rather than shrinking the desktop page.
 
-## GPT-specific icon rule
+<!-- shared:rules -->
+## House rules
 
-When using a GPT model, do not introduce 45-degree diagonal arrows in UI: no ↗, ↘, ↖, or ↙ glyphs, diagonal arrow icons (such as `ArrowUpRight`), or SVG/CSS equivalents. This includes buttons, navigation, cards, external-link indicators, and hover states. Prefer a clear text label; use a horizontal arrow or chevron only when it communicates an action. Apply this to UI within the requested scope, unless the user explicitly requests a diagonal arrow. In review-only work, flag violations without editing.
+- **No diagonal arrows.** Do not add 45-degree arrows to UI: ↗ ↘ ↖ ↙ glyphs, icons such as `ArrowUpRight`, or rotated SVG/CSS arrows, including external-link indicators and hover states. Use a clear label; add a horizontal arrow or chevron only when it signals an action.
+- **No decorative section numbers.** Avoid labels such as `01 — About`, a number joined to a rule and a label, or zero-padded counters used only for an editorial look. Use a plain category label or a descriptive heading without substituting another ornament. Keep numbers that convey real order, steps, ranks, dates, or data.
 
-## Section labels for all models
-
-Do not add decorative section numbers paired with a dash or horizontal rule, such as `01 — The everyday`, `01 -- About`, or a number followed by a CSS/SVG line and a label. Avoid automatic zero-padded chapter counters used only to signal an editorial look. Prefer a concise category label or a descriptive heading in natural case, with restrained typography and whitespace. Do not replace this with mandatory dots, pills, or other ornaments. Keep numbering when it conveys real order, steps, ranks, dates, or data, or when explicitly requested. Apply changes within the task's scope; review-only skills flag this pattern without editing.
+Explicit user requests override these rules. Apply them within the task's scope; in review-only work, report violations without editing.
+<!-- /shared:rules -->
 
 ## Inspect the failure
 
@@ -37,10 +38,10 @@ Break at the point where content needs a different arrangement, using existing p
 
 ## Implement and inspect
 
-Use flexible layouts and appropriate minimum sizing. Allow long labels and localized text to wrap. Keep form controls legible and avoid hardcoded heights around variable content.
+Use flexible layouts and appropriate minimum sizing. When a component appears in containers of different widths, a container query (`container-type: inline-size` with `@container`) can adapt it to its own space rather than the viewport. Allow long labels and localized text to wrap. Keep form controls legible and avoid hardcoded heights around variable content.
 
 Check fixed controls, cookie banners, sticky navigation, safe-area handling, and the on-screen keyboard where the task touches them. Prevent layers from covering the primary action or keyboard focus. Preserve meaningful DOM order.
 
-Check narrow, intermediate, and wide widths, plus landscape and zoom where relevant. Exercise menu opening/closing, forms, dialogs, and affected gestures. Use actual device testing if available, and distinguish it from viewport emulation.
+Check narrow, intermediate, and wide widths, plus landscape and zoom where relevant. Exercise menu opening/closing, forms, dialogs, and affected gestures. Use actual device testing if available, and distinguish it from viewport emulation. If the project already has Playwright, `scripts/inspect.mjs` in this skill's folder reports horizontal overflow and its likely source elements: run `node <skill-folder>/scripts/inspect.mjs <url> --widths 320,390,768,1440` from the project root. It writes to a temporary folder and edits nothing; do not install Playwright without the user's agreement.
 
 Check that the desktop design did not regress after shared CSS changes. Run relevant project checks and report tested sizes and remaining limitations. Avoid claiming support for devices or browsers that were not tested.
